@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Zombie.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/25 12:20:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/25 16:09:49 by yzaytoun         ###   ########.fr       */
+/*   Created: 2024/02/25 15:43:15 by yzaytoun          #+#    #+#             */
+/*   Updated: 2024/02/25 16:08:49 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
-#include <iostream>
+#ifndef ZOMBIE_HPP
+# define ZOMBIE_HPP
 
-static void	PrintString(std::string argument)
+#include <string>
+
+class Zombie
 {
-	std::cout << argument << std::endl;
-}
+	private:
+		std::string	name;
+	
+	public:
+		Zombie(std::string);
+		~Zombie();
+		void	announce(void);
+};
 
-int	main()
-{
-	Zombie	newzombie("New Zombie 1");
-
-	PrintString("hola mundo");
-	return (EXIT_SUCCESS);
-}
+#endif

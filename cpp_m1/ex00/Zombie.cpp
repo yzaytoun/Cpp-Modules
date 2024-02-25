@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Zombie.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/25 12:20:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/25 16:09:49 by yzaytoun         ###   ########.fr       */
+/*   Created: 2024/02/25 15:47:54 by yzaytoun          #+#    #+#             */
+/*   Updated: 2024/02/25 16:05:42 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
-#include <iostream>
 
-static void	PrintString(std::string argument)
+Zombie	*newZombie(std::string name)
 {
-	std::cout << argument << std::endl;
+	Zombie	*newZombie;
+
+	newZombie = new Zombie(name);
+	if (newZombie == NULL)
+		return (NULL);
+	return (newZombie);
 }
 
-int	main()
+/*Default Construct*/
+Zombie::Zombie(std::string name)
 {
-	Zombie	newzombie("New Zombie 1");
-
-	PrintString("hola mundo");
-	return (EXIT_SUCCESS);
+	this->name = name;
 }
