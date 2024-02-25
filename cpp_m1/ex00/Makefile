@@ -6,27 +6,33 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/25 12:21:00 by yzaytoun          #+#    #+#              #
-#    Updated: 2024/02/25 12:29:23 by yzaytoun         ###   ########.fr        #
+#    Updated: 2024/02/25 17:14:31 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-name = Zombie
+NAME = Zombie
 
-SRC = main.cpp zombie.cpp
+INCLUDE = Zombie.hpp
 
-CPPFLAGS := -Wall -Wextra -Werror -std=c++98
+SRC = main.cpp Zombie.cpp randomChump.cpp newZombie.cpp
+
+CPPFLAGS := -Wall -Wextra -Werror -std=c++98 -I $(INCLUDE)
+
+OBJ = $(SRC:%.cpp=%.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	@echo "Creating..." $<
-	CPP CPPFLAGS $< -o $@
+	$(CXX) $(CPPFLAGS) $(OBJ) -o $@
 
 clean:
+	@echo "Cleaning Object Files\n"
 	@$(RM) $(OBJ)
 
 fclean: clean
-	$(RM) $(NAME)
+	@echo "Cleaning Zombie\n"
+	@$(RM) $(NAME)
 
 re: fclean all
 

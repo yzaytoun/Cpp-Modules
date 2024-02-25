@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 15:43:15 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/25 16:08:49 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/25 16:59:40 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define ZOMBIE_HPP
 
 #include <string>
+#include <iostream>
 
 class Zombie
 {
@@ -25,5 +26,9 @@ class Zombie
 		~Zombie();
 		void	announce(void);
 };
+
+void	PrintString(std::string argument);
+Zombie	*newZombie(std::string name);
+void	randomChump(std::string name);
 
 #endif
