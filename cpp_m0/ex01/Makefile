@@ -6,17 +6,19 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/25 12:21:00 by yzaytoun          #+#    #+#              #
-#    Updated: 2024/06/08 15:03:11 by yzaytoun         ###   ########.fr        #
+#    Updated: 2024/06/08 17:54:12 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = megaphone
+NAME = phonebook
 
-SRC = megaphone.cpp
+SRC = PhoneBook.cpp main.cpp Contact.cpp
 
 CXX := c++
 
-CPPFLAGS := -Wall -Wextra -Werror -std=c++98
+INC = PhoneBook.hpp Contact.hpp
+
+CPPFLAGS := -Wall -Wextra -Werror -std=c++98 -I $(INC)
 
 OBJ = $(SRC:%.cpp=%.o)
 
