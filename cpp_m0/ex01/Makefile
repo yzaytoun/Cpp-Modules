@@ -16,17 +16,17 @@ SRC = PhoneBook.cpp main.cpp Contact.cpp
 
 CXX := c++
 
-INC = PhoneBook.hpp Contact.hpp
+INC = -IPhoneBook.hpp -IContact.hpp
 
-CPPFLAGS := -Wall -Wextra -Werror -std=c++98 -I $(INC)
+CPPFLAGS := -Wall -Wextra -Werror -std=c++98 $(INC) -g
 
 OBJ = $(SRC:%.cpp=%.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@echo "Creating..." $<
-	$(CXX) $(CPPFLAGS) $(OBJ) -o $@
+	@echo "Creating..." $@
+	@$(CXX) $(CPPFLAGS) $(OBJ) -o $@
 
 clean:
 	@echo "Cleaning Object Files\n"

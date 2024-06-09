@@ -27,8 +27,7 @@ public:
  
 	void		Add(void);
 	void		Exit(void);
-	Contact		Search(void);
-
+	void		Search(void);
 };
 
 STRING	get_input(STRING str);

@@ -14,13 +14,13 @@
 
 PhoneBook::PhoneBook(void)
 {
-	this->currcount = 0;
-	std::cout << "PhoneBook Constructor Called" << std::endl;
+	this->currcount = -1;
+	//std::cout << "PhoneBook Constructor Called" << std::endl;
 }
 
 PhoneBook::~PhoneBook()
 {
-	std::cout << "PhoneBook Destructor Called" << std::endl;
+	//std::cout << "PhoneBook Destructor Called" << std::endl;
 }
 
 void	PhoneBook::Add(void)
@@ -51,35 +51,53 @@ int	PhoneBook::CurrentSize(void)
 	return (count);
 }
 
-/// Add Truncate string
+static STRING	TruncateString(STRING str)
+{
+	STRING	truncated;
+
+	if (!str.empty())
+	{
+		truncated = str;
+		if (truncated.length() > 10)
+		{
+			truncated.resize(10);
+			truncated.append(".");
+		}
+	}
+	return (truncated);
+}
 
 static void	DisplayContacts(Contact contacts[8], int size)
 {
-	int	index;
+	int	index = 0;
 
-	std::cout << "Index\tFirst Name\t|\tLast Name\t|\tnickname\n" << std::endl;
+	std::cout
+		<< "\nIndex\t| First Name | Last Name | nickname\n"
+		<< "-------------------------------------------------" << std::endl;
 	while (index < size)
 	{
 		std::cout
 			<< "["
 			<< index
 			<< "]"
-			<< "\t|\t"
-			<< contacts[index].Get(FIRST_NAME)
-			<< "|\t"
-			<< contacts[index].Get(LAST_NAME)
-			<< "|\t"
-			<< contacts[index].Get(NICKNAME)
+			<< "\t|"
+			<< TruncateString(contacts[index].Get(FIRST_NAME))
+			<< " | "
+			<< TruncateString(contacts[index].Get(LAST_NAME))
+			<< " | "
+			<< TruncateString(contacts[index].Get(NICKNAME))
 			<< std::endl;
 		++index;
 	}
+	std::cout << "\n-------------------------------------------------\n" << std::endl;
 }
 
 static bool	IsValidNum(const STRING str)
 {
 	int	x = 0;
+	int	len = (int)str.length();
 
-	while (str.at(x) != '\0')
+	while (x < len)
 	{
 		if (isdigit(str.at(x)) == false)
 			return (false);
@@ -88,25 +106,32 @@ static bool	IsValidNum(const STRING str)
 	return (true);
 }
 
-Contact	PhoneBook::Search(void)
+void	PhoneBook::Search(void)
 {
 	STRING	input;
 	int		index;
-	Contact	contact;
+	int		size = this->CurrentSize();
 
-	DisplayContacts(this->Contacts, this->CurrentSize());
+	if (size > 0)
+		DisplayContacts(this->Contacts, size);
+	else
+	{
+		std::cout << "No enteries found, book is empty" << std::endl;
+		return ;
+	}
 	input = get_input("Insert Index: ");
 	if (IsValidNum(input) == true)
 	{
 		index = std::stoi(input);
-		if (index > 7)
+		if (index > 7 || index > size - 1)
 		{
 			std::cout << "Index out of bound" << std::endl;
 			return ;
 		}
-		contact = this->Contacts[index];
+		this->Contacts[index].Print();
 	}
-	return (contact);
+	else
+		std::cout << "Not a valid input" << std::endl;
 }
 
 void	PhoneBook::Exit(void)

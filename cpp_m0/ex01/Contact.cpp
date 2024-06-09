@@ -14,12 +14,12 @@
 
 Contact::Contact()
 {
-	std::cout << "Contact Constructor Called" << std::endl;
+	//std::cout << "Contact Constructor Called" << std::endl;
 }
 
 Contact::~Contact()
 {
-	std::cout << "Contact Destructor Called" << std::endl;
+	//std::cout << "Contact Destructor Called" << std::endl;
 }
 
 void	Contact::Set(const STRING str, t_key key)
@@ -53,4 +53,15 @@ STRING	Contact::Get(t_key key)
 	else if (key == SECRET)
 		output = this->secret;
 	return (output);
+}
+
+void	Contact::Print(void)
+{
+	std::cout
+		<< "First Name: " << this->first_name
+		<< "\nLast Name: " << this->last_name
+		<< "\nNickname: " << this->nickname
+		<< "\nPhone Number: " << this->phone
+		<< "\nSecret: " << this->secret
+	<< std::endl;
 }

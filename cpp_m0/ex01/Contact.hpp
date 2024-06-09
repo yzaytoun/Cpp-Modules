@@ -15,7 +15,7 @@
 
 # include <iostream>
 
-typedef typename std::string STRING;
+typedef std::string STRING;
 
 typedef enum e_key
 {
@@ -33,7 +33,7 @@ private:
 	STRING	last_name;
 	STRING 	nickname;
 	STRING	phone;
-	STRING	secret;	
+	STRING	secret;
 
 public:
 	Contact();
@@ -42,6 +42,7 @@ public:
 	/* Methods */
 	void	Set(STRING str, t_key key);
 	STRING	Get(t_key key);
+	void	Print(void);
 };
 
 #endif

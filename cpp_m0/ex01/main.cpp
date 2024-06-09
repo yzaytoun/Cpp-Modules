@@ -18,11 +18,11 @@ STRING	get_input(STRING str)
 	STRING	input;
 
 	std::cout << str;
-	std::cin >> input;
+	std::getline(std::cin, input);
 	return (input);
 }
 
-int main(int argc, char const *argv[])
+int main(void)
 {
 	PhoneBook	Book;
 	STRING		input;
@@ -30,8 +30,6 @@ int main(int argc, char const *argv[])
 	while (1)
 	{
 		input = get_input("Enter Command (ADD/SEARCH/EXIT): ");
-		if (input.empty())
-			break;
 		if (input.compare("SEARCH") == 0)
 			Book.Search();
 		else if (input.compare("ADD") == 0)
