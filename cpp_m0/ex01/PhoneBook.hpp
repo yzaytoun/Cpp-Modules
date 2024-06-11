@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:54:40 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/06/08 21:29:51 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/06/11 20:27:45 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define PHONEBOOK_H
 
 # include "Contact.hpp"
+# include <iostream>
+# include <string>
+# include <cstdlib>
 
 class PhoneBook
 {
@@ -31,5 +34,6 @@ public:
 };
 
 STRING	get_input(STRING str);
-
+int		StringToInteger(std::string str);
+bool	IsValidNum(const STRING str);
 #endif

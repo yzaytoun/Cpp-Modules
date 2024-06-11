@@ -6,13 +6,13 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/25 12:21:00 by yzaytoun          #+#    #+#              #
-#    Updated: 2024/06/08 17:54:12 by yzaytoun         ###   ########.fr        #
+#    Updated: 2024/06/11 20:31:46 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = phonebook
 
-SRC = PhoneBook.cpp main.cpp Contact.cpp
+SRC = PhoneBook.cpp main.cpp Contact.cpp PhoneBook_Search.cpp IsValidNum.cpp
 
 CXX := c++
 

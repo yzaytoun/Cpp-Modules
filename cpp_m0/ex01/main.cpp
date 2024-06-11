@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 19:01:25 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/06/08 20:22:38 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/06/11 20:48:49 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,13 @@ STRING	get_input(STRING str)
 {
 	STRING	input;
 
-	std::cout << str;
-	std::getline(std::cin, input);
+	while (input.empty())
+	{
+		std::cout << str;
+		std::getline(std::cin, input);
+		if (input.empty())
+			std::cout << "**** Empty fields are not allowed ****" << std::endl;
+	}
 	return (input);
 }
 
