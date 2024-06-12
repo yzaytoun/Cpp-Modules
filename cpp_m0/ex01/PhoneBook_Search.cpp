@@ -16,7 +16,7 @@ int	PhoneBook::CurrentSize(void)
 {
 	int	count = 0;
 
-	while (!this->Contacts[count].Get(FIRST_NAME).empty())
+	while (!this->Contacts[count].Get(FIRST_NAME).empty() && count < 8)
 		count++;
 	return (count);
 }
@@ -79,7 +79,7 @@ void	PhoneBook::Search(void)
 	if (IsValidNum(input) == true)
 	{
 		index = std::atoi(input.c_str());
-		if (index > 7 || index > size - 1)
+		if (index > 7 || index > size - 1 || index < 0)
 		{
 			std::cout << "Index out of bound" << std::endl;
 			return ;
