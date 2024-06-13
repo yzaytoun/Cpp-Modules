@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/25 12:21:00 by yzaytoun          #+#    #+#              #
-#    Updated: 2024/06/11 20:31:46 by yzaytoun         ###   ########.fr        #
+#    Updated: 2024/06/13 19:58:04 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CXX := c++
 
 INC = -IPhoneBook.hpp -IContact.hpp
 
-CPPFLAGS := -Wall -Wextra -Werror -std=c++98 $(INC) -g
+CPPFLAGS := -Wall -Wextra -Werror -std=c++98 $(INC) -g3
 
 OBJ = $(SRC:%.cpp=%.o)
 
@@ -26,7 +26,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@echo "Creating..." $@
-	@$(CXX) $(CPPFLAGS) $(OBJ) -o $@
+	@$(CXX) $(CPPFLAGS) $(OBJ) -o $@ -g
 
 clean:
 	@echo "Cleaning Object Files\n"

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:54:40 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/06/11 20:27:45 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/06/13 20:14:11 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <iostream>
 # include <string>
 # include <cstdlib>
+
+# define CONTACT_MAX 8
 
 class PhoneBook
 {

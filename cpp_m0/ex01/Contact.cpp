@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 19:04:42 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/06/08 21:14:05 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/06/13 20:34:21 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ void	Contact::Set(const STRING str, t_key key)
 	if (str.empty())
 		return ;
 	if (key == FIRST_NAME)
-		this->first_name = str;
+		this->first_name.assign(str);
 	else if (key == LAST_NAME)
-		this->last_name = str;
+		this->last_name.assign(str);
 	else if (key == NICKNAME)
-		this->nickname = str;
+		this->nickname.assign(str);
 	else if (key == PHONE)
-		this->phone = str;
+		this->phone.assign(str);
 	else if (key == SECRET)
-		this->secret = str;
+		this->secret.assign(str);
 }
 
 STRING	Contact::Get(t_key key)
@@ -63,5 +63,6 @@ void	Contact::Print(void)
 		<< "\nNickname: " << this->nickname
 		<< "\nPhone Number: " << this->phone
 		<< "\nSecret: " << this->secret
-	<< std::endl;
+		<< "\n---------------------------\n"
+		<< std::endl;
 }

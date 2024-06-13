@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 20:24:42 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/06/11 20:51:21 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/06/13 20:22:31 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	PhoneBook::CurrentSize(void)
 {
 	int	count = 0;
 
-	while (!this->Contacts[count].Get(FIRST_NAME).empty() && count < 8)
+	while (count <= CONTACT_MAX - 1 && !this->Contacts[count].Get(FIRST_NAME).empty())
 		count++;
 	return (count);
 }
