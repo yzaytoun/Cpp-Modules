@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:54:40 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/06/13 20:14:11 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/06/15 20:56:14 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@
 # include <iostream>
 # include <string>
 # include <cstdlib>
+# include <iomanip>
 
 # define CONTACT_MAX 8
 
 class PhoneBook
 {
 private:
-	Contact		Contacts[8];
+	Contact		Contacts[CONTACT_MAX];
 	int			CurrentSize();
 	int			currcount;
 public:
@@ -36,6 +37,6 @@ public:
 };
 
 STRING	get_input(STRING str);
-int		StringToInteger(std::string str);
 bool	IsValidNum(const STRING str);
+
 #endif

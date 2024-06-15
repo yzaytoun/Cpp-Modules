@@ -6,24 +6,24 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/25 12:21:00 by yzaytoun          #+#    #+#              #
-#    Updated: 2024/06/08 15:03:11 by yzaytoun         ###   ########.fr        #
+#    Updated: 2024/06/15 18:26:55 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = megaphone
+NAME = accounts
 
-SRC = megaphone.cpp
+SRC = Account.cpp tests.cpp
 
 CXX := c++
 
-CPPFLAGS := -Wall -Wextra -Werror -std=c++98
+CPPFLAGS := -Wall -Wextra -Werror -std=c++98 -I Account.hpp
 
 OBJ = $(SRC:%.cpp=%.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@echo "Creating..." $<
+	@echo "Creating..." $@
 	$(CXX) $(CPPFLAGS) $(OBJ) -o $@
 
 clean:

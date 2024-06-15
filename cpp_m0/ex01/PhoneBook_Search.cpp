@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 20:24:42 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/06/13 20:22:31 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/06/15 21:14:01 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,15 @@ static void	DisplayContacts(Contact contacts[8], int size)
 {
 	int	index = 0;
 
-	std::cout
-		<< "\nIndex | First Name | Last Name | nickname\n"
-		<< "-------------------------------------------------" << std::endl;
+	
+	std::cout << std::setw(10) << "Index";
+	std::cout << "|";
+	std::cout << std::setw(10) << "First Name";
+	std::cout << "|";
+	std::cout << std::setw(10) << "Last Name";
+	std::cout << "|";
+	std::cout << std::setw(10) << "Nickname\n";
+	std::cout << "-------------------------------------------------" << std::endl;
 	while (index < size)
 	{
 		std::cout

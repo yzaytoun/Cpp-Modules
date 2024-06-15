@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 19:01:25 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/06/11 20:48:49 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/06/15 20:57:00 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ STRING	get_input(STRING str)
 {
 	STRING	input;
 
-	while (input.empty())
+	while (input.empty() && std::cin.good())
 	{
 		std::cout << str;
 		std::getline(std::cin, input);
