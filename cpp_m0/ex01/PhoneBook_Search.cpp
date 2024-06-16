@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 20:24:42 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/06/15 21:14:01 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/06/16 16:25:23 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,29 +40,21 @@ static STRING	TruncateString(STRING str)
 static void	DisplayContacts(Contact contacts[8], int size)
 {
 	int	index = 0;
-
 	
-	std::cout << std::setw(10) << "Index";
-	std::cout << "|";
-	std::cout << std::setw(10) << "First Name";
-	std::cout << "|";
-	std::cout << std::setw(10) << "Last Name";
-	std::cout << "|";
-	std::cout << std::setw(10) << "Nickname\n";
+	std::cout << "-------------------------------------------------" << std::endl;
+	std::cout << std::left << std::setw(10) << "Index" << "|";
+	std::cout << std::left << std::setw(10) << "FirstName" << "|";
+	std::cout << std::left << std::setw(10) << "LastName" << "|";
+	std::cout << std::left << std::setw(10) << "NickName" << std::endl;
 	std::cout << "-------------------------------------------------" << std::endl;
 	while (index < size)
 	{
-		std::cout
-			<< "["
-			<< index
-			<< "]"
-			<< " | "
-			<< TruncateString(contacts[index].Get(FIRST_NAME))
-			<< " | "
-			<< TruncateString(contacts[index].Get(LAST_NAME))
-			<< " | "
-			<< TruncateString(contacts[index].Get(NICKNAME))
-			<< std::endl;
+		std::cout << "[" << index << "]";
+		std::cout << std::right << std::setw(8) << "|";
+		std::cout << std::left << std::setw(10) << TruncateString(contacts[index].Get(FIRST_NAME)) << "|";
+		std::cout << std::left << std::setw(10) << TruncateString(contacts[index].Get(LAST_NAME)) << "|";
+		std::cout << std::left << std::setw(10) << TruncateString(contacts[index].Get(NICKNAME));
+		std::cout << std::endl;
 		++index;
 	}
 	std::cout << "\n-------------------------------------------------\n" << std::endl;
@@ -81,7 +73,7 @@ void	PhoneBook::Search(void)
 		std::cout << "No enteries found, book is empty" << std::endl;
 		return ;
 	}
-	input = get_input("Insert Index: ");
+	input = get_input("Insert Index: ", 0);
 	if (IsValidNum(input) == true)
 	{
 		index = std::atoi(input.c_str());

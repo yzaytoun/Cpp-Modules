@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 18:55:25 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/06/11 20:46:33 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/06/16 16:23:24 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,21 @@ void	PhoneBook::Add(void)
 	this->currcount += 1;
 	if (this->currcount > 7) /*Return to first entry*/
 		this->currcount = 0;
-	input = get_input("Insert First Name: ");
+	input = get_input("Insert First Name: ", 0);
 	this->Contacts[currcount].Set(input, FIRST_NAME);
-	input.assign(get_input("Insert Last Name: "));
+	input.assign(get_input("Insert Last Name: ", 0));
 	this->Contacts[currcount].Set(input, LAST_NAME);
-	input.assign(get_input("Insert Nickname: "));
+	input.assign(get_input("Insert Nickname: ", 0));
 	this->Contacts[currcount].Set(input, NICKNAME);
 	while (IsValidNum(input) == false)
 	{
-		input.assign(get_input("Insert Phone Number: "));
+		input.assign(get_input("Insert Phone Number: ", 0));
 		if (IsValidNum(input) == true)
 			this->Contacts[currcount].Set(input, PHONE);
 		else
 			std::cout << "Not a valid Phone number" << std::endl;
 	}
-	input.assign(get_input("Insert Secret: "));
+	input.assign(get_input("Insert Secret: ", 0));
 	this->Contacts[currcount].Set(input, SECRET);
 }
 
