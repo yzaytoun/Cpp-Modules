@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 15:43:15 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/08/13 14:20:48 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/08/13 18:25:56 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ class Zombie
 		std::string	name;
 	
 	public:
+		Zombie();
 		Zombie(std::string);
 		~Zombie();
 		void	announce(void);
-		void	*operator new(size_t size);
-		void	operator delete(void *ptr);
+		void	setname(std::string name);
 };
 
 void	PrintString(std::string argument);

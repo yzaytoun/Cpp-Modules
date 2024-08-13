@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 12:20:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/08/13 14:16:16 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/08/13 18:22:47 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,10 @@ int	main(void)
 		{
 			std::cout << "Num:" << index << " -> ";
 			horde[index].announce();
-			std::cout << std::endl;
 			++index;
 		}
 		
 	}
-	delete[] horde;
+	delete[] (horde);
 	return (EXIT_SUCCESS);
 }

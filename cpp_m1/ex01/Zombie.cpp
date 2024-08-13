@@ -6,17 +6,16 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 15:47:54 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/08/13 14:25:24 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/08/13 18:27:21 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
 /*Default Construct*/
-Zombie::Zombie(std::string name)
+Zombie::Zombie()
 {
-	this->name = name;
-	PrintString(name + " Constrcutor called");
+	PrintString("Constrcutor called");
 }
 
 /*Default Destructor*/
@@ -37,20 +36,9 @@ void	PrintString(std::string argument)
 	std::cout << argument << std::endl;
 }
 
-/*New Constructor*/
-void	*operator new(size_t size)
+void	Zombie::setname(std::string name)
 {
-	void	*ptr;
-
-	if (size < 0)
-		return (NULL);
-	ptr = ::operator new(size);
-	PrintString("New Constrcutor called");
-}
-
-/*Delete Destructor*/
-void	operator delete(void *ptr)
-{
-	PrintString("Delete Destrcutor called");
-	free(ptr);
+	if (name.empty())
+		return ;
+	this->name = name;
 }

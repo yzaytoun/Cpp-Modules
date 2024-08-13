@@ -6,13 +6,13 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:55:55 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/08/13 14:16:05 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/08/13 18:27:36 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-Zombie* zombieHorde(int N, std::string name)
+Zombie	*zombieHorde(int N, std::string name)
 {
 	Zombie	*horde;
 	int		index = 0;
@@ -22,7 +22,7 @@ Zombie* zombieHorde(int N, std::string name)
 	horde = new Zombie[N];
 	while (index < N)
 	{
-		horde[index] = Zombie(name);
+		horde[index].setname(name);
 		++index;
 	}
 	return (horde);
