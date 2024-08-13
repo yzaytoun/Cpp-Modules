@@ -6,17 +6,17 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/25 12:21:00 by yzaytoun          #+#    #+#              #
-#    Updated: 2024/08/13 12:10:32 by yzaytoun         ###   ########.fr        #
+#    Updated: 2024/08/13 13:10:51 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Zombie
+NAME = ZombieHorde
 
 INCLUDE = Zombie.hpp
 
-SRC = main.cpp Zombie.cpp randomChump.cpp newZombie.cpp
+SRC = main.cpp Zombie.cpp zombieHorde.cpp
 
-CPPFLAGS := -Wall -Wextra -Werror -std=c++98 -I $(INCLUDE)
+CPPFLAGS := -Wall -Wextra -Werror -std=c++98 -I $(INCLUDE) -g
 
 CXX := c++
 

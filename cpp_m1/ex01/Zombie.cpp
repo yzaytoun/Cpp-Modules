@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 15:47:54 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/08/13 12:47:43 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/08/13 14:25:24 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,22 @@ void	Zombie::announce(void)
 void	PrintString(std::string argument)
 {
 	std::cout << argument << std::endl;
+}
+
+/*New Constructor*/
+void	*operator new(size_t size)
+{
+	void	*ptr;
+
+	if (size < 0)
+		return (NULL);
+	ptr = ::operator new(size);
+	PrintString("New Constrcutor called");
+}
+
+/*Delete Destructor*/
+void	operator delete(void *ptr)
+{
+	PrintString("Delete Destrcutor called");
+	free(ptr);
 }
