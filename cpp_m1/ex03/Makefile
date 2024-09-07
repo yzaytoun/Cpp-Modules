@@ -6,17 +6,19 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/25 12:21:00 by yzaytoun          #+#    #+#              #
-#    Updated: 2024/02/25 17:14:31 by yzaytoun         ###   ########.fr        #
+#    Updated: 2024/09/07 19:29:40 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Zombie
+NAME = Weapon
 
-INCLUDE = Zombie.hpp
+INC = -IHumanA.hpp -IHumanB.hpp -IWeapon.hpp
 
-SRC = main.cpp Zombie.cpp randomChump.cpp newZombie.cpp
+SRC = main.cpp HumanA.cpp HumanB.cpp Weapon.cpp
 
-CPPFLAGS := -Wall -Wextra -Werror -std=c++98 -I $(INCLUDE)
+CPPFLAGS := -Wall -Wextra -Werror -std=c++98 $(INC) -g
+
+CXX := c++
 
 OBJ = $(SRC:%.cpp=%.o)
 
@@ -31,7 +33,7 @@ clean:
 	@$(RM) $(OBJ)
 
 fclean: clean
-	@echo "Cleaning Zombie\n"
+	@echo "Cleaning $(NAME)\n"
 	@$(RM) $(NAME)
 
 re: fclean all
