@@ -12,36 +12,35 @@
 
 #include "Sed.hpp"
 
-Sed::Sed()
+/*
+	Replace str_to_replace inside fullstr with new_str
+*/
+static void	ReplaceString(std::string fullstr, std::string str_to_replace, std::string new_str)
 {
-}
+	size_t	pos = 0;
 
-Sed::~Sed()
-{
-}
-
-void	Sed::OpenFile(const std::string fname)
-{
-	if (fname.empty())
+	if (fullstr.empty())
 		return ;
-	this->_ifd.open(fname, std::fstream::in);
-}
-
-bool	Sed::IsValidFile(void)
-{
-	return (!this->_ifd.is_open());
-}
-
-void	Sed::WriteToFile(void)
-{
-	this->_ofd.open((this->_fname + ".replace"), std::ofstream::out | std::ofstream::app);
-	if (this->_ofd.is_open())
+	while (pos != std::string::npos && pos <= fullstr.length())
 	{
-		this->_ofd.write();
+		pos = fullstr.find(str_to_replace);
+		if (pos != std::string::npos)
+		{
+			fullstr.erase(pos, str_to_replace.length());
+			fullstr.insert(pos, new_str);
+		}
 	}
 }
 
-void	Sed::CloseFile(void)
+void	Sed::FindAndReplace(std::string str_to_replace, std::string new_str)
 {
-	this->_ifd.close();
+	std::string	buffer;
+	this->_ofd.open((this->_fname + ".replace"), std::ofstream::out | std::ofstream::app);
+
+	while (!this->_ifd.eof() && this->_ifd.good())
+	{
+		std::getline(this->_ifd, buffer);
+		ReplaceString(buffer, str_to_replace, new_str);
+		//append to fullstr
+	}
 }

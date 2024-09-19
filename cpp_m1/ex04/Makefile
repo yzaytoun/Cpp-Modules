@@ -10,11 +10,11 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Weapon
+NAME = Sed
 
-INC = -IHumanA.hpp -IHumanB.hpp -IWeapon.hpp
+INC = -ISed.hpp
 
-SRC = main.cpp HumanA.cpp HumanB.cpp Weapon.cpp
+SRC = main.cpp Sed.cpp Replace.cpp
 
 CPPFLAGS := -Wall -Wextra -Werror -std=c++98 $(INC) -g
 
@@ -25,7 +25,7 @@ OBJ = $(SRC:%.cpp=%.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@echo "Creating..." $<
+	@echo "Creating..." $@
 	$(CXX) $(CPPFLAGS) $(OBJ) -o $@
 
 clean:

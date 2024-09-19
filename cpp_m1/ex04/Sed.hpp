@@ -13,22 +13,22 @@
 #pragma once
 
 #include <iostream>
+#include <fstream>
 #include <string>
-#include <cstdio>
 
 class Sed
 {
 private:
-	std::string	_fname;
-	FILE		*_fd;
-	std::string	_s1;
-	std::string	_s2;
+	std::string		_fname;
+	std::ifstream	_ifd;
+	std::ofstream	_ofd;
 public:
 	Sed();
 	~Sed();
 
 	void	OpenFile(std::string fname);
+	void	CloseFile(void);
+	void	WriteToFile(void);
 	void	FindAndReplace(std::string str_to_replace, std::string new_str);
 	bool	IsValidFile(void);
-	bool	CheckEoF(void);
 };

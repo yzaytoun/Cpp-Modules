@@ -20,7 +20,10 @@ int main(int ac, char **av)
 	{
 		prog.OpenFile(av[0]);
 		if (prog.IsValidFile())
+		{
 			prog.FindAndReplace(av[1], av[2]);
+			prog.CloseFile();
+		}
 		else
 			std::perror("Open file error");
 	}
