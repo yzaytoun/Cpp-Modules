@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanB.hpp                                         :+:      :+:    :+:   */
+/*   Sed.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/07 19:09:10 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/09/19 12:34:33 by yzaytoun         ###   ########.fr       */
+/*   Created: 2024/09/19 12:49:23 by yzaytoun          #+#    #+#             */
+/*   Updated: 2024/09/19 16:09:49 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,21 @@
 
 #include <iostream>
 #include <string>
-#include "Weapon.hpp"
+#include <cstdio>
 
-class HumanB
+class Sed
 {
 private:
-	std::string		name;
-	Weapon			*weapon;
+	std::string	_fname;
+	FILE		*_fd;
+	std::string	_s1;
+	std::string	_s2;
 public:
-	HumanB(std::string name);
-	~HumanB();
-	void	attack(void);
-	void	setWeapon(Weapon &weapon);
+	Sed();
+	~Sed();
+
+	void	OpenFile(std::string fname);
+	void	FindAndReplace(std::string str_to_replace, std::string new_str);
+	bool	IsValidFile(void);
+	bool	CheckEoF(void);
 };

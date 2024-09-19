@@ -6,30 +6,28 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 12:20:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/09/07 19:09:44 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/09/19 10:30:24 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "HumanA.hpp"
-#include "HumanB.hpp"
-#include "Weapon.hpp"
+#include <string>
+#include <iostream>
 
-int main()
+int	main(void)
 {
-	{
-		Weapon club = Weapon("crude spiked club");
-		HumanA bob("Bob", club);
-		bob.attack();
-		club.setType("some other type of club");
-		bob.attack();
-	}
-	{
-		Weapon club = Weapon("crude spiked club");
-		HumanB jim("Jim");
-		jim.setWeapon(club);
-		jim.attack();
-		club.setType("some other type of club");
-		jim.attack();
-	}
-	return 0;
+	std::string	str("HI THIS IS BRAIN");
+	std::string	*stringPTR = &str;
+	std::string	&stringREF = str;
+
+	std::cout << "--- String pointers ---" << std::endl;
+	std::cout << "str pointer -> " << &str << std::endl;
+	std::cout << "stringPTR pointer -> " << &stringPTR << std::endl;
+	std::cout << "stringREF pointer -> " << &stringREF << std::endl;
+
+	std::cout << "--- String values ---" << std::endl;
+	std::cout << str << std::endl;
+	std::cout << stringPTR << std::endl;
+	std::cout << stringREF << std::endl;
+
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 19:02:56 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/09/07 19:16:49 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/09/19 10:45:28 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ Weapon::~Weapon()
 {
 }
 
-std::string	Weapon::getType( void )
+const std::string	&Weapon::getType( void )
 {
 	return (this->type);
 }

@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanB.hpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/07 19:09:10 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/09/19 12:34:33 by yzaytoun         ###   ########.fr       */
+/*   Created: 2024/02/25 12:20:53 by yzaytoun          #+#    #+#             */
+/*   Updated: 2024/09/19 16:08:47 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#include "Sed.hpp"
 
-#include <iostream>
-#include <string>
-#include "Weapon.hpp"
-
-class HumanB
+int main(int ac, char **av)
 {
-private:
-	std::string		name;
-	Weapon			*weapon;
-public:
-	HumanB(std::string name);
-	~HumanB();
-	void	attack(void);
-	void	setWeapon(Weapon &weapon);
-};
+	Sed	prog;
+
+	if (ac == 3)
+	{
+		prog.OpenFile(av[0]);
+		if (prog.IsValidFile())
+			prog.FindAndReplace(av[1], av[2]);
+		else
+			std::perror("Open file error");
+	}
+	return 0;
+}
