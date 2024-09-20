@@ -16,12 +16,13 @@ int main(int ac, char **av)
 {
 	Sed	prog;
 
-	if (ac == 3)
+	if (ac == 4)
 	{
-		prog.OpenFile(av[0]);
+		prog.OpenFile(av[1]);
 		if (prog.IsValidFile())
 		{
-			prog.FindAndReplace(av[1], av[2]);
+			prog.FindAndReplace(av[2], av[3]);
+			prog.WriteToFile();
 			prog.CloseFile();
 		}
 		else

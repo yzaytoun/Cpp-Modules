@@ -22,6 +22,7 @@ private:
 	std::string		_fname;
 	std::ifstream	_ifd;
 	std::ofstream	_ofd;
+	std::string		_buffer;
 public:
 	Sed();
 	~Sed();

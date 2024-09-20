@@ -15,7 +15,7 @@
 /*
 	Replace str_to_replace inside fullstr with new_str
 */
-static void	ReplaceString(std::string fullstr, std::string str_to_replace, std::string new_str)
+static void	ReplaceString(std::string& fullstr, std::string str_to_replace, std::string new_str)
 {
 	size_t	pos = 0;
 
@@ -35,12 +35,11 @@ static void	ReplaceString(std::string fullstr, std::string str_to_replace, std::
 void	Sed::FindAndReplace(std::string str_to_replace, std::string new_str)
 {
 	std::string	buffer;
-	this->_ofd.open((this->_fname + ".replace"), std::ofstream::out | std::ofstream::app);
 
 	while (!this->_ifd.eof() && this->_ifd.good())
 	{
 		std::getline(this->_ifd, buffer);
 		ReplaceString(buffer, str_to_replace, new_str);
-		//append to fullstr
+		this->_buffer.append(buffer + "\n");
 	}
 }

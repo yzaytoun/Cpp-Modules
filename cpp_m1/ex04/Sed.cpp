@@ -25,11 +25,12 @@ void	Sed::OpenFile(const std::string fname)
 	if (fname.empty())
 		return ;
 	this->_ifd.open(fname, std::fstream::in);
+	this->_fname = fname;
 }
 
 bool	Sed::IsValidFile(void)
 {
-	return (!this->_ifd.is_open());
+	return (this->_ifd.is_open());
 }
 
 void	Sed::WriteToFile(void)
@@ -37,7 +38,8 @@ void	Sed::WriteToFile(void)
 	this->_ofd.open((this->_fname + ".replace"), std::ofstream::out | std::ofstream::app);
 	if (this->_ofd.is_open())
 	{
-		this->_ofd.write();
+		this->_ofd.write(this->_buffer.c_str(), this->_buffer.length());
+		this->_ofd.close();
 	}
 }
 
