@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Sed.cpp                                            :+:      :+:    :+:   */
+/*   Replace.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 12:49:56 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/09/19 16:25:30 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/09/20 17:06:59 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,15 @@ static void	ReplaceString(std::string& fullstr, std::string str_to_replace, std:
 
 void	Sed::FindAndReplace(std::string str_to_replace, std::string new_str)
 {
-	std::string	buffer;
+	std::stringstream	stream;
+	std::string			str("");
+	char				c_buff[BUFSIZ] = "";
 
 	while (!this->_ifd.eof() && this->_ifd.good())
 	{
-		std::getline(this->_ifd, buffer);
-		ReplaceString(buffer, str_to_replace, new_str);
-		this->_buffer.append(buffer + "\n");
+		this->_ifd.read(c_buff, BUFSIZ);
+		str.assign(c_buff);
+		ReplaceString(str, str_to_replace, new_str);
+		this->_buffer.append(str);
 	}
 }

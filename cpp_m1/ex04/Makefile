@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/25 12:21:00 by yzaytoun          #+#    #+#              #
-#    Updated: 2024/09/19 12:43:52 by yzaytoun         ###   ########.fr        #
+#    Updated: 2024/09/20 16:17:44 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ fclean: clean
 	@$(RM) $(NAME)
 
 memcheck:
-	valgrind -leak-check=full ./$(NAME)
+	valgrind --leak-check=full --track-origins=yes ./$(NAME) f Sed hola
 
 re: fclean all
 
