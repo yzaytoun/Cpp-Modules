@@ -6,15 +6,15 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/25 12:21:00 by yzaytoun          #+#    #+#              #
-#    Updated: 2024/09/19 12:43:52 by yzaytoun         ###   ########.fr        #
+#    Updated: 2024/09/20 20:20:32 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Weapon
+NAME = harlFilter
 
-INC = -IHumanA.hpp -IHumanB.hpp -IWeapon.hpp
+INC = -IHarl.hpp
 
-SRC = main.cpp HumanA.cpp HumanB.cpp Weapon.cpp
+SRC = main.cpp Harl.cpp
 
 CPPFLAGS := -Wall -Wextra -Werror -std=c++98 $(INC) -g
 
