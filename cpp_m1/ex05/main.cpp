@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 12:20:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/09/20 17:36:20 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/09/20 19:05:38 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@ int main(void)
 {
 	Harl	har;
 
-	std::cout << "Passing empty string" << std::endl;
+	std::cout << "\n\033[1;31mPassing empty string\033[0m" << std::endl;
 	har.complain("");
-	std::cout << "Passing info" << std::endl;
+	std::cout << "\n\033[1;32mPassing info\033[0m" << std::endl;
 	har.complain("info");
-	std::cout << "Passing debug" << std::endl;
+	std::cout << "\n\033[1;34mPassing debug\033[0m" << std::endl;
 	har.complain("debug");
-	std::cout << "Passing error" << std::endl;
+	std::cout << "\n\033[1;31mPassing error\033[0m" << std::endl;
 	har.complain("error");
-	std::cout << "Passing Warning" << std::endl;
+	std::cout << "\n\033[1;33mPassing Warning\033[0m" << std::endl;
 	har.complain("warning");
-	std::cout << "Passing strange input" << std::endl;
+	std::cout << "\n\033[1;31mPassing strange input\033[0m" << std::endl;
 	har.complain("asdasdasdaga asfasfasf");
 	return 0;
 }
