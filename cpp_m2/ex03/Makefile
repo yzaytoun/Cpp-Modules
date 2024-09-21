@@ -6,11 +6,11 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/25 12:21:00 by yzaytoun          #+#    #+#              #
-#    Updated: 2024/09/20 20:20:29 by yzaytoun         ###   ########.fr        #
+#    Updated: 2024/09/20 20:20:32 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Harl
+NAME = harlFilter
 
 INC = -IHarl.hpp
 

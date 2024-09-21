@@ -6,20 +6,22 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 12:20:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/25 17:15:53 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/09/21 16:54:04 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include "Fixed.hpp"
 
-int	main()
+int main( void )
 {
-	Zombie	*newzombie = newZombie("Zombie 1");
+	Fixed a;
+	Fixed b( a );
+	Fixed c;
 
-	if (newzombie != nullptr)
-		newzombie->announce();
-	
-	randomChump("Zombie 2");
-	delete newzombie;
-	return (EXIT_SUCCESS);
+	c = b;
+	std::cout << a.getRawBits() << std::endl;
+	std::cout << b.getRawBits() << std::endl;
+	std::cout << c.getRawBits() << std::endl;
+
+	return 0;
 }

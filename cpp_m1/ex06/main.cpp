@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 12:20:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/09/20 21:32:33 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/09/21 15:58:45 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	get_messagetype(std::string level)
 int main(int ac, char **av)
 {
 	Harl	har;
-	
+
 	if (ac == 2)
 	{
 		switch (get_messagetype(av[1]))

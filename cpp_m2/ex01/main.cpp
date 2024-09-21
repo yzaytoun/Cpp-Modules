@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   newZombie.cpp                                      :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/25 15:43:42 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/25 17:10:48 by yzaytoun         ###   ########.fr       */
+/*   Created: 2024/02/25 12:20:53 by yzaytoun          #+#    #+#             */
+/*   Updated: 2024/02/25 17:15:53 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
-#include <string>
 
-Zombie*	newZombie(std::string name)
+int	main()
 {
-	if (name.empty())
-		return (nullptr);
-	Zombie	*newzombie = new Zombie(name);
-	if (newzombie == nullptr)
-		return (nullptr);
-	return (newzombie);
+	Zombie	*newzombie = newZombie("Zombie 1");
+
+	if (newzombie != nullptr)
+		newzombie->announce();
+	
+	randomChump("Zombie 2");
+	delete newzombie;
+	return (EXIT_SUCCESS);
 }
