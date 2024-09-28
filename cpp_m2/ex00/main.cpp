@@ -6,11 +6,19 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 12:20:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/09/21 16:54:04 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/09/28 18:02:13 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
+
+void	print(std::string str, int endl)
+{
+	if (endl)
+		std::cout << str << std::endl;
+	else
+		std::cout << str;
+}
 
 int main( void )
 {
