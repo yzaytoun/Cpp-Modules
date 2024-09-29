@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 16:54:14 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/09/29 15:59:22 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/09/29 16:27:25 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,80 @@ int		Fixed::toInt(void) const
 	return (
 		static_cast<int> (this->_fixed_point >> _fraction)
 	);
+}
+
+//https://github.com/mizvekov/fp/blob/master/fp/fp.hpp
+Fixed&	operator<(const Fixed& f1, const Fixed& f2)
+{
+	
+}
+Fixed&	operator>(const Fixed& f1, const Fixed& f2)
+{
+	
+}
+Fixed&	operator<=(const Fixed& f1, const Fixed& f2)
+{
+	
+}
+Fixed&	operator>=(const Fixed& f1, const Fixed& f2)
+{
+	
+}
+Fixed&	operator==(const Fixed& f1, const Fixed& f2)
+{
+	
+}
+Fixed&	operator!=(const Fixed& f1, const Fixed& f2)
+{
+	
+}
+
+Fixed&	operator+(const Fixed& f1, const Fixed& f2)
+{
+	
+}
+
+Fixed&	operator-(const Fixed& f1, const Fixed& f2)
+{
+	
+}
+
+Fixed&	operator/(const Fixed& f1, const Fixed& f2)
+{
+	
+}
+
+Fixed&	operator*(const Fixed& f1, const Fixed& f2)
+{
+	
+}
+
+Fixed&	operator++(const Fixed& f)
+{
+
+}
+
+Fixed&	operator--(const Fixed& f)
+{
+
+}
+
+Fixed&	Fixed::min(const Fixed& f1, const Fixed& f2)
+{
+	
+}
+
+Fixed&	Fixed::min(Fixed& f1, Fixed& f2)
+{
+	
+}
+
+Fixed&	Fixed::max(const Fixed& f1, const Fixed& f2)
+{
+	
+}
+
+Fixed&	Fixed::max(Fixed& f1, Fixed& f2)
+{
+	
 }

@@ -6,15 +6,15 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/25 12:21:00 by yzaytoun          #+#    #+#              #
-#    Updated: 2024/09/20 20:20:32 by yzaytoun         ###   ########.fr        #
+#    Updated: 2024/09/28 17:58:15 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = harlFilter
+NAME = a.out
 
-INC = -IHarl.hpp
+INC = -IFixed.hpp
 
-SRC = main.cpp Harl.cpp
+SRC = main.cpp Fixed.cpp
 
 CPPFLAGS := -Wall -Wextra -Werror -std=c++98 $(INC) -g
 
@@ -25,7 +25,7 @@ OBJ = $(SRC:%.cpp=%.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@echo "Creating..." $<
+	@echo "Creating..." $@
 	$(CXX) $(CPPFLAGS) $(OBJ) -o $@
 
 clean:

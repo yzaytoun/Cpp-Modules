@@ -6,20 +6,33 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 12:20:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/25 17:15:53 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/09/29 16:04:59 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include "Fixed.hpp"
 
-int	main()
+void	print(std::string str, int endl)
 {
-	Zombie	*newzombie = newZombie("Zombie 1");
+	if (endl)
+		std::cout << str << std::endl;
+	else
+		std::cout << str;
+}
 
-	if (newzombie != nullptr)
-		newzombie->announce();
+int main( void )
+{
+	Fixed a;
+	Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
+
+	std::cout << a << std::endl;
+	std::cout << ++a << std::endl;
+	std::cout << a << std::endl;
+	std::cout << a++ << std::endl;
+	std::cout << a << std::endl;
 	
-	randomChump("Zombie 2");
-	delete newzombie;
-	return (EXIT_SUCCESS);
+	std::cout << b << std::endl;
+	
+	std::cout << Fixed::max( a, b ) << std::endl;
+	return 0;
 }

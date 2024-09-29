@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 16:48:34 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/09/29 13:52:14 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/09/29 16:16:31 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,28 @@ class Fixed
 		Fixed(float const integer);
 		~Fixed();
 	
-		Fixed& 			operator=(const Fixed &f);
 		friend std::ostream&	operator<<(std::ostream &out, const Fixed &f);
+		Fixed&					operator=(const Fixed& f);
+
+		friend Fixed& 			operator<(const Fixed& f1, const Fixed& f2);
+		friend Fixed& 			operator>(const Fixed& f1, const Fixed& f2);
+		friend Fixed& 			operator<=(const Fixed& f1, const Fixed& f2);
+		friend Fixed& 			operator>=(const Fixed& f1, const Fixed& f2);
+		friend Fixed& 			operator==(const Fixed& f1, const Fixed& f2);
+		friend Fixed& 			operator!=(const Fixed& f1, const Fixed& f2);
+	
+		friend Fixed& 			operator+(const Fixed& f1, const Fixed& f2);
+		friend Fixed& 			operator-(const Fixed& f1, const Fixed& f2);
+		friend Fixed& 			operator/(const Fixed& f1, const Fixed& f2);
+		friend Fixed& 			operator*(const Fixed& f1, const Fixed& f2);
+ 
+		friend Fixed& 			operator++(const Fixed& f);
+		friend Fixed& 			operator--(const Fixed& f);
+
+		static Fixed&			min(const Fixed& f1, const Fixed& f2);
+		static Fixed&			min(Fixed& f1, Fixed& f2);
+		static Fixed&			max(const Fixed& f1, const Fixed& f2);
+		static Fixed&			max(Fixed& f1, Fixed& f2);
 
 		int		getRawBits(void) const;
 		void	setRawBits(int const raw);
