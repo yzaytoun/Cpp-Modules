@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 16:54:14 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/09/29 16:27:25 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/10/01 19:35:43 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 Fixed::Fixed(void) : _fixed_point(0)
 {
-	print("Default constructor called", 1);
+	//print("Default constructor called", 1);
 }
 
 Fixed::Fixed(const Fixed& f) : _fixed_point(f.getRawBits())
 {
-	print("Copy constructor called", 1);
+	//print("Copy constructor called", 1);
 }
 
 Fixed::Fixed(const int num) : _fixed_point(num << _fraction)
@@ -33,12 +33,12 @@ Fixed::Fixed(const float num)
 
 Fixed::~Fixed(void)
 {
-	print("Destructor called", 1);
+	//print("Destructor called", 1);
 }
 
 Fixed&	Fixed::operator=(const Fixed &f)
 {
-	print("Copy assignment operator called", 1);
+	//print("Copy assignment operator called", 1);
 	if (this != &f)
 		this->_fixed_point = f.getRawBits();
 	return (*this);
@@ -52,7 +52,7 @@ std::ostream&	operator<<(std::ostream &out, const Fixed &f)
 
 int	Fixed::getRawBits(void) const
 {
-	print("getRawBits member function called", 1);
+	//print("getRawBits member function called", 1);
 	return (this->_fixed_point);
 }
 
@@ -76,77 +76,122 @@ int		Fixed::toInt(void) const
 }
 
 //https://github.com/mizvekov/fp/blob/master/fp/fp.hpp
-Fixed&	operator<(const Fixed& f1, const Fixed& f2)
+bool	operator<(const Fixed& f1, const Fixed& f2)
 {
-	
-}
-Fixed&	operator>(const Fixed& f1, const Fixed& f2)
-{
-	
-}
-Fixed&	operator<=(const Fixed& f1, const Fixed& f2)
-{
-	
-}
-Fixed&	operator>=(const Fixed& f1, const Fixed& f2)
-{
-	
-}
-Fixed&	operator==(const Fixed& f1, const Fixed& f2)
-{
-	
-}
-Fixed&	operator!=(const Fixed& f1, const Fixed& f2)
-{
-	
+	return (f1.toFloat() < f2.toFloat());
 }
 
-Fixed&	operator+(const Fixed& f1, const Fixed& f2)
+bool	operator>(const Fixed& f1, const Fixed& f2)
 {
+	return (f1.toFloat() > f2.toFloat());
+}
+
+bool	operator<=(const Fixed& f1, const Fixed& f2)
+{
+	return (f1.toFloat() <= f2.toFloat());
+}
+
+bool	operator>=(const Fixed& f1, const Fixed& f2)
+{
+	return (f1.toFloat() >= f2.toFloat());
+}
+
+bool	operator==(const Fixed& f1, const Fixed& f2)
+{
+	return (f1.toFloat() == f2.toFloat());
+}
+
+bool	operator!=(const Fixed& f1, const Fixed& f2)
+{
+	return (f1.toFloat() != f2.toFloat());
+}
+
+Fixed	operator+(const Fixed& f1, const Fixed& f2)
+{
+	Fixed	res(f1.toFloat() + f2.toFloat());
 	
+	return (res);
 }
 
-Fixed&	operator-(const Fixed& f1, const Fixed& f2)
+Fixed	operator-(const Fixed& f1, const Fixed& f2)
 {
+	Fixed	res(f1.toFloat() - f2.toFloat());
 	
+	return (res);
 }
 
-Fixed&	operator/(const Fixed& f1, const Fixed& f2)
+Fixed	operator/(const Fixed& f1, const Fixed& f2)
 {
+	Fixed	res(f1.toFloat() / f2.toFloat());
 	
+	return (res);
 }
 
-Fixed&	operator*(const Fixed& f1, const Fixed& f2)
+Fixed	operator*(const Fixed& f1, const Fixed& f2)
 {
-	
+	Fixed	res(f1.toFloat() * f2.toFloat());
+
+	return (res);
 }
 
-Fixed&	operator++(const Fixed& f)
+const Fixed&	operator++(Fixed& f)
 {
-
+	f._fixed_point++;
+	return (f);
 }
 
-Fixed&	operator--(const Fixed& f)
+const Fixed&	operator--(Fixed& f)
 {
-
+	f._fixed_point--;
+	return (f);
 }
 
-Fixed&	Fixed::min(const Fixed& f1, const Fixed& f2)
+const Fixed	operator++(Fixed& f, int i)
 {
-	
+	(void)i;
+	Fixed	before(f);
+
+	f._fixed_point++;
+	return (before);
 }
 
-Fixed&	Fixed::min(Fixed& f1, Fixed& f2)
+const Fixed	operator--(Fixed& f, int i)
 {
-	
+	(void)i;
+	Fixed	before(f);
+
+	f._fixed_point--;
+	return (before);
 }
 
-Fixed&	Fixed::max(const Fixed& f1, const Fixed& f2)
+const Fixed&	Fixed::min(const Fixed& f1, const Fixed& f2)
 {
-	
+	if (f1._fixed_point < f2._fixed_point)
+		return (f1);
+	else
+		return (f2);
 }
 
-Fixed&	Fixed::max(Fixed& f1, Fixed& f2)
+const Fixed&	Fixed::min(Fixed& f1, Fixed& f2)
 {
-	
+	if (f1._fixed_point < f2._fixed_point)
+		return (f1);
+	else
+		return (f2);
+}
+
+const Fixed&	Fixed::max(const Fixed& f1, const Fixed& f2)
+{
+	if (f1._fixed_point > f2._fixed_point)
+		return (f1);
+	else
+		return (f2);
+}
+
+const Fixed&	Fixed::max(Fixed& f1, Fixed& f2)
+{
+	if (f1._fixed_point > f2._fixed_point)
+		return (f1);
+	else
+		return (f2);
 }
