@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 18:20:34 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/10/03 18:40:39 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/10/03 18:53:16 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,12 @@ class Point
 		
 		friend bool	operator!=(const Point& p1, const Point p2);
 		friend bool	operator==(const Point& p1, const Point p2);
+		friend bool	operator<(const Point& p1, const Point p2);
+		friend bool	operator>(const Point& p1, const Point p2);
+		friend bool	operator<=(const Point& p1, const Point p2);
+		friend bool	operator>=(const Point& p1, const Point p2);
 	
-		//friend std::ostream&	operator<<(std::ostream& out, const Point& p);
-		std::ostream	operator<<(const Point& p);
+		friend std::ostream&	operator<<(std::ostream& out, const Point& p);
 };
 /*
 	@param a,b,c vertices of the triangle

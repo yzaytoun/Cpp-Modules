@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 18:20:03 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/10/03 18:43:31 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/10/03 18:55:23 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,38 @@ Point&	Point::operator=(const Point& p)
 	if (this != &p)
 		*this = Point(p);
 	return (*this);
+}
+
+std::ostream&	operator<<(std::ostream& out, const Point& p)
+{
+	out << "{ " << p._x << " , " << p._y << " }";
+	return (out);
+}
+
+bool	operator<=(const Point& p1, const Point p2)
+{
+	if (p1._x <= p2._x && p1._y <= p2._y)
+		return (true);
+	return (false);	
+}
+
+bool	operator>=(const Point& p1, const Point p2)
+{
+	if (p1._x >= p2._x && p1._y >= p2._y)
+		return (true);
+	return (false);	
+}
+
+bool	operator<(const Point& p1, const Point p2)
+{
+	if (p1._x < p2._x && p1._y < p2._y)
+		return (true);
+	return (false);	
+}
+
+bool	operator>(const Point& p1, const Point p2)
+{
+	if (p1._x > p2._x && p1._y > p2._y)
+		return (true);
+	return (false);	
 }
