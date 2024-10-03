@@ -6,20 +6,22 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 12:20:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/25 17:15:53 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/10/03 18:21:45 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include "Fixed.hpp"
 
-int	main()
+void	print(std::string str, int endl)
 {
-	Zombie	*newzombie = newZombie("Zombie 1");
+	if (endl)
+		std::cout << str << std::endl;
+	else
+		std::cout << str;
+}
 
-	if (newzombie != nullptr)
-		newzombie->announce();
+int main( void )
+{
 	
-	randomChump("Zombie 2");
-	delete newzombie;
-	return (EXIT_SUCCESS);
+	return 0;
 }
