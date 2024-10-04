@@ -1,24 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   newZombie.cpp                                      :+:      :+:    :+:   */
+/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/25 15:43:42 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/25 17:10:48 by yzaytoun         ###   ########.fr       */
+/*   Created: 2024/10/04 18:42:46 by yzaytoun          #+#    #+#             */
+/*   Updated: 2024/10/04 18:59:59 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
-#include <string>
+#pragma once
 
-Zombie*	newZombie(std::string name)
+#include <string>
+#include <iostream>
+
+class ClapTrap
 {
-	if (name.empty())
-		return (nullptr);
-	Zombie	*newzombie = new Zombie(name);
-	if (newzombie == nullptr)
-		return (nullptr);
-	return (newzombie);
-}
+	private:
+		std::string	_name;
+		int			_hit_points;
+		int			_energy_points;
+		int			_attack_damage;
+	public:
+		ClapTrap(const std::string name);
+		~ClapTrap(void);
+	
+		std::string	getName(void) const;
+		void		attack(const std::string& target);
+		void		takeDamage(unsigned int amount);
+		void		beRepaired(unsigned int amount);
+};
+
