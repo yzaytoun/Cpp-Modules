@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 18:20:34 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/10/03 18:53:16 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/10/04 18:32:02 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ class Point
 		Point(const Point& p);
 		~Point(void);
 
+		Fixed	getX(void) const;
+		Fixed	getY(void) const;
+
 		Point&		operator=(const Point& p);
 		
 		friend bool	operator!=(const Point& p1, const Point p2);
@@ -38,6 +41,7 @@ class Point
 	
 		friend std::ostream&	operator<<(std::ostream& out, const Point& p);
 };
+
 /*
 	@param a,b,c vertices of the triangle
 	@param point the point to check

@@ -6,11 +6,11 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 12:20:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/10/03 18:21:45 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/10/04 18:36:24 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Fixed.hpp"
+#include "Point.hpp"
 
 void	print(std::string str, int endl)
 {
@@ -22,6 +22,17 @@ void	print(std::string str, int endl)
 
 int main( void )
 {
-	
+	Point	p1(5, 5);
+	Point	p2(1, 1);
+	Point	p3(1, 5);
+	Point	p4(3, 3);
+
+	std::cout << bsp(p1, p2, p3, p4) << std::endl;
+	Point	pp(-1, -10);
+	std::cout << bsp(p1, pp, p3, p4) << std::endl;
+	Point	pp1(5, 5);
+	std::cout << bsp(p1, pp1, p3, p4) << std::endl;
+	Point	pp2(10, 5);
+	std::cout << bsp(p1, p2, p3, pp2) << std::endl;
 	return 0;
 }
