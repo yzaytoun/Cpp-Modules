@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 12:20:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/10/04 19:00:08 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/10/05 19:05:45 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int main( void )
 {
 	ClapTrap	p("player");
-	ClapTrap	m("monster")
+	ClapTrap	m("monster");
 
 	p.attack(m.getName());
-	
+	p.beRepaired(5);
 	return 0;
 }
