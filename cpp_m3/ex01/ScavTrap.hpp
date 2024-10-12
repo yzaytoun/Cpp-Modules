@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/25 12:20:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/10/12 18:28:43 by yzaytoun         ###   ########.fr       */
+/*   Created: 2024/10/12 18:36:23 by yzaytoun          #+#    #+#             */
+/*   Updated: 2024/10/12 19:41:56 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
+
+#include <string>
+#include <iostream>
 #include "ClapTrap.hpp"
 
-int main( void )
+class ScavTrap : public ClapTrap
 {
-	ClapTrap	p("player");
-	ClapTrap	m("monster");
+	public:
+		ScavTrap(const std::string name);
+		ScavTrap(const ScavTrap& scav);
+		~ScavTrap(void);
 
-	p.addDamagePower(2);
-	m.addDamagePower(1);
-	int	i = 0;
-	while (i < 2)
-	{
-		p.attack(m.getName());
-		m.takeDamage(p.getDamage() + i);
-		m.attack(p.getName());
-		p.takeDamage(m.getDamage() + i);
-		p.beRepaired(5);
-		p.printEnergy();
-		m.printEnergy();
-		++i;
-	}
-	return 0;
-}
+		void	attack(const std::string& target);
+		void	guardGate(void);
+};
+

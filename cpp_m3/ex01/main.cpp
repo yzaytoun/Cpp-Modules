@@ -6,33 +6,38 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 12:20:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/10/04 18:36:24 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/10/12 19:41:02 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Point.hpp"
-
-void	print(std::string str, int endl)
-{
-	if (endl)
-		std::cout << str << std::endl;
-	else
-		std::cout << str;
-}
+#include "ScavTrap.hpp"
 
 int main( void )
 {
-	Point	p1(5, 5);
-	Point	p2(1, 1);
-	Point	p3(1, 5);
-	Point	p4(3, 3);
+	ScavTrap	p("player");
+	ScavTrap	m("monster");
+	ScavTrap	g(p);
+	
 
-	std::cout << bsp(p1, p2, p3, p4) << std::endl;
-	Point	pp(-1, -10);
-	std::cout << bsp(p1, pp, p3, p4) << std::endl;
-	Point	pp1(5, 5);
-	std::cout << bsp(p1, pp1, p3, p4) << std::endl;
-	Point	pp2(10, 5);
-	std::cout << bsp(p1, p2, p3, pp2) << std::endl;
+	std::cout << "----------------------------" << std::endl;
+	p.addDamagePower(2);
+	m.addDamagePower(1);
+	g.addDamagePower(100);
+	int	i = 0;
+	while (i < 2)
+	{
+		p.attack(m.getName());
+		m.takeDamage(p.getDamage() + i);
+		g.attack(m.getName());
+		m.takeDamage(g.getDamage() + i);
+		m.attack(p.getName());
+		p.takeDamage(m.getDamage() + i);
+		p.beRepaired(5);
+		p.printEnergy();
+		g.printEnergy();
+		m.printEnergy();
+		++i;
+	}
+	std::cout << "----------------------------" << std::endl;
 	return 0;
 }
