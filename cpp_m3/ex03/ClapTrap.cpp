@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 18:42:25 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/10/12 18:31:22 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/10/12 19:56:46 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,16 @@ ClapTrap::ClapTrap(const std::string name) :
 	_energy_points(10),
 	_attack_damage(0)
 {
-	std::cout << "ClapTrap " << this->_name << " Constructor called" << std::endl;
+	std::cout << "ClapTrap Constructor called" << std::endl;
+}
+
+ClapTrap::ClapTrap(const std::string name, int hit_points, int energy_points, int damage_power) :
+	_name(name),
+	_hit_points(hit_points),
+	_energy_points(energy_points),
+	_attack_damage(damage_power)
+{
+	std::cout << "ClapTrap Constructor called" << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap& clap) : 
@@ -30,7 +39,7 @@ ClapTrap::ClapTrap(const ClapTrap& clap) :
 
 ClapTrap::~ClapTrap(void)
 {
-	std::cout << "ClapTrap " << this->_name << " Destructor called" << std::endl;
+	std::cout << "ClapTrap Destructor called" << std::endl;
 }
 
 ClapTrap&	ClapTrap::operator=(const ClapTrap& clap)

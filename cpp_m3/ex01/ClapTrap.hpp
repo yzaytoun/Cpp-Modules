@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 18:42:46 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/10/12 19:58:14 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/10/18 19:34:22 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,3 @@ class ClapTrap
 		void		beRepaired(unsigned int amount);
 		void		addDamagePower(unsigned int amount);
 };
-

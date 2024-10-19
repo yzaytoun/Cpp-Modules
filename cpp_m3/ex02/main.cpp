@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 12:20:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/10/18 19:42:44 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/10/19 19:40:18 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int main( void )
 {
-	FlagTrap	p("player");
-	FlagTrap	m("monster");
-	FlagTrap	g(p);
+	FragTrap	p("player");
+	FragTrap	m("monster");
+	FragTrap	g(p);
 	
 
 	std::cout << "----------------------------" << std::endl;

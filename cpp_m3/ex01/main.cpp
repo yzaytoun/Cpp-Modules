@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 12:20:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/10/12 19:41:02 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/10/18 19:35:32 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int main( void )
 	p.addDamagePower(2);
 	m.addDamagePower(1);
 	g.addDamagePower(100);
+	g.guardGate();
 	int	i = 0;
 	while (i < 2)
 	{
