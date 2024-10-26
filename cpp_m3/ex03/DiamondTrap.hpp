@@ -22,12 +22,17 @@ class DiamondTrap : public FragTrap, public ScavTrap
 {
 	private:
 		std::string	_name;
+		int			_hit_points;
+		int			_energy_points;
+		int			_attack_damage;
+
 	public:
 		DiamondTrap(const std::string name);
 		DiamondTrap(const DiamondTrap& scav);
 		~DiamondTrap(void);
 
-		void	attack(const std::string& target);
-		void	whoAmI(void);
+		void		attack(const std::string& target);
+		std::string	getName(void);
+		void		whoAmI(void);
 };
 

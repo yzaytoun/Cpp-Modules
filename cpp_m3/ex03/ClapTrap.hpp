@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 18:42:46 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/10/18 19:34:22 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/10/26 11:48:52 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 class ClapTrap
 {
-	private:
+	protected:
 		std::string	_name;
 		int			_hit_points;
 		int			_energy_points;

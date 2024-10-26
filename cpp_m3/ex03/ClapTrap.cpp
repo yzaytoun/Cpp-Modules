@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 18:42:25 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/10/12 19:56:46 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/10/26 12:43:47 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ ClapTrap::ClapTrap(const ClapTrap& clap) :
 	_hit_points(clap._hit_points),
 	_energy_points(clap._energy_points),
 	_attack_damage(clap._attack_damage)
-{}
+{
+	std::cout << "ClapTrap Copy constructor called" << std::endl;
+}
 
 ClapTrap::~ClapTrap(void)
 {

@@ -6,15 +6,15 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/25 12:21:00 by yzaytoun          #+#    #+#              #
-#    Updated: 2024/10/18 19:47:35 by yzaytoun         ###   ########.fr        #
+#    Updated: 2024/10/26 13:12:51 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = a.out
 
-INC = -IClapTrap.hpp -IScavTrap.hpp -IFlagTrap.hpp DiamondTrap.hpp
+INC = -IClapTrap.hpp -IScavTrap.hpp -IFragTrap.hpp -IDiamondTrap.hpp
 
-SRC = main.cpp ClapTrap.cpp ScavTrap.cpp FlagTrap.cpp DiamondTrap.cpp
+SRC = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
 
 CPPFLAGS := -Wall -Wextra -Werror -std=c++98 $(INC) -g
 

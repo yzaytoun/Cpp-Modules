@@ -6,17 +6,17 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/25 12:21:00 by yzaytoun          #+#    #+#              #
-#    Updated: 2024/10/18 19:39:03 by yzaytoun         ###   ########.fr        #
+#    Updated: 2024/10/26 12:04:48 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = a.out
 
-INC = -IClapTrap.hpp -IScavTrap.hpp -IFlagTrap.hpp
+INC = -IClapTrap.hpp -IScavTrap.hpp -IFragTrap.hpp
 
-SRC = main.cpp ClapTrap.cpp ScavTrap.cpp FlagTrap.cpp
+SRC = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp
 
-CPPFLAGS := -Wall -Wextra -Werror -std=c++98 $(INC) -g
+CPPFLAGS := -Wall -Wextra -Werror -Wshadow -Wno-shadow -std=c++98 $(INC) -g
 
 CXX := c++
 
