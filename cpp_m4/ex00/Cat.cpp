@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Cat.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/25 12:20:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/10/26 13:51:47 by yzaytoun         ###   ########.fr       */
+/*   Created: 2024/10/26 13:26:03 by yzaytoun          #+#    #+#             */
+/*   Updated: 2024/10/26 13:53:41 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Animal.hpp"
-#include "Dog.hpp"
 #include "Cat.hpp"
 
-int main( void )
+Cat::Cat() : _type("Cat")
 {
-	const Animal* meta = new Animal();
-	const Animal* j = new Dog();
-	const Animal* i = new Cat();
+	std::cout << "Cat constructor called" << std::endl;
+}
 
-	std::cout << j->getType() << " " << std::endl;
-	std::cout << i->getType() << " " << std::endl;
-	i->makeSound(); //will output the cat sound!
-	j->makeSound();
-	meta->makeSound();
+Cat::~Cat()
+{
+	std::cout << "Cat destructor called" << std::endl;
+}
 
-	delete meta;
-	delete j;
-	delete i;
-	return 0;
+void	Cat::makeSound(void) const
+{
+	std::cout << "miaow!!" << std::endl;
 }

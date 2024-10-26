@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Dog.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/25 12:20:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/10/26 13:51:47 by yzaytoun         ###   ########.fr       */
+/*   Created: 2024/10/26 13:34:17 by yzaytoun          #+#    #+#             */
+/*   Updated: 2024/10/26 13:59:45 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Animal.hpp"
 #include "Dog.hpp"
-#include "Cat.hpp"
 
-int main( void )
+Dog::Dog() : _type("Dog")
 {
-	const Animal* meta = new Animal();
-	const Animal* j = new Dog();
-	const Animal* i = new Cat();
+	std::cout << "Dog constructor called" << std::endl;
+}
 
-	std::cout << j->getType() << " " << std::endl;
-	std::cout << i->getType() << " " << std::endl;
-	i->makeSound(); //will output the cat sound!
-	j->makeSound();
-	meta->makeSound();
+Dog::~Dog()
+{
+	std::cout << "Dog destructor called" << std::endl;
+}
 
-	delete meta;
-	delete j;
-	delete i;
-	return 0;
+void	Dog::makeSound(void) const
+{
+	std::cout << "Woof!!" << std::endl;
 }

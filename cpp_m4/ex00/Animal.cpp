@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Animal.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/25 12:20:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/10/26 13:51:47 by yzaytoun         ###   ########.fr       */
+/*   Created: 2024/10/26 13:29:49 by yzaytoun          #+#    #+#             */
+/*   Updated: 2024/10/26 13:53:46 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Animal.hpp"
-#include "Dog.hpp"
-#include "Cat.hpp"
 
-int main( void )
+Animal::Animal() : _type("Animal")
 {
-	const Animal* meta = new Animal();
-	const Animal* j = new Dog();
-	const Animal* i = new Cat();
+	std::cout << "Animal constructor called" << std::endl;
+}
 
-	std::cout << j->getType() << " " << std::endl;
-	std::cout << i->getType() << " " << std::endl;
-	i->makeSound(); //will output the cat sound!
-	j->makeSound();
-	meta->makeSound();
+Animal::~Animal()
+{
+	std::cout << "Animal destructor called" << std::endl;
+}
 
-	delete meta;
-	delete j;
-	delete i;
-	return 0;
+std::string	Animal::getType(void) const
+{
+	return (this->_type);
+}
+
+void	Animal::makeSound(void) const
+{
+	std::cout << "Animal sound!" << std::endl;
 }

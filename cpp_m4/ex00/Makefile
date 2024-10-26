@@ -6,24 +6,26 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/25 12:21:00 by yzaytoun          #+#    #+#              #
-#    Updated: 2024/02/25 17:14:31 by yzaytoun         ###   ########.fr        #
+#    Updated: 2024/10/26 13:24:42 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Zombie
+NAME = a.out
 
-INCLUDE = Zombie.hpp
+INC = -IAnimal.hpp -IDog.hpp -ICat.hpp
 
-SRC = main.cpp Zombie.cpp randomChump.cpp newZombie.cpp
+SRC = main.cpp Animal.cpp Dog.cpp Cat.cpp
 
-CPPFLAGS := -Wall -Wextra -Werror -std=c++98 -I $(INCLUDE)
+CPPFLAGS := -Wall -Wextra -Werror -std=c++98 $(INC) -g
+
+CXX := c++
 
 OBJ = $(SRC:%.cpp=%.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@echo "Creating..." $<
+	@echo "Creating..." $@
 	$(CXX) $(CPPFLAGS) $(OBJ) -o $@
 
 clean:
@@ -31,8 +33,11 @@ clean:
 	@$(RM) $(OBJ)
 
 fclean: clean
-	@echo "Cleaning Zombie\n"
+	@echo "Cleaning $(NAME)\n"
 	@$(RM) $(NAME)
+
+memcheck:
+	valgrind -leak-check=full ./$(NAME)
 
 re: fclean all
 
