@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.cpp                                            :+:      :+:    :+:   */
+/*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/26 13:26:03 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/10/26 15:40:37 by yzaytoun         ###   ########.fr       */
+/*   Created: 2024/10/26 15:48:53 by yzaytoun          #+#    #+#             */
+/*   Updated: 2024/10/26 15:49:27 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cat.hpp"
+#pragma once
 
-Cat::Cat() : _type("Cat")
-{
-	std::cout << "Cat constructor called" << std::endl;
-}
+#include <iostream>
+#include <string>
 
-Cat::~Cat()
+class WrongAnimal
 {
-	std::cout << "Cat destructor called" << std::endl;
-}
-
-void	Cat::makeSound(void) const
-{
-	std::cout << "miaow!!" << std::endl;
-}
-
-std::string	Cat::getType(void) const
-{
-	return (this->_type);
-}
+	protected:
+		std::string	_type;
+	public:
+		WrongAnimal();
+		virtual ~WrongAnimal();
+		WrongAnimal(const WrongAnimal& animal);
+	
+	std::string		getType(void) const;
+	void			makeSound(void) const;
+};

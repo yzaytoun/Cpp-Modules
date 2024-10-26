@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.cpp                                            :+:      :+:    :+:   */
+/*   WrongCat.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/26 13:26:03 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/10/26 15:40:37 by yzaytoun         ###   ########.fr       */
+/*   Created: 2024/10/26 15:50:25 by yzaytoun          #+#    #+#             */
+/*   Updated: 2024/10/26 15:50:41 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cat.hpp"
+#include "WrongCat.hpp"
 
-Cat::Cat() : _type("Cat")
+WrongCat::WrongCat() : _type("WrongCat")
 {
-	std::cout << "Cat constructor called" << std::endl;
+	std::cout << "WrongCat constructor called" << std::endl;
 }
 
-Cat::~Cat()
+WrongCat::~WrongCat()
 {
-	std::cout << "Cat destructor called" << std::endl;
+	std::cout << "WrongCat destructor called" << std::endl;
 }
 
-void	Cat::makeSound(void) const
+void	WrongCat::makeSound(void) const
 {
 	std::cout << "miaow!!" << std::endl;
 }
 
-std::string	Cat::getType(void) const
+std::string	WrongCat::getType(void) const
 {
 	return (this->_type);
 }

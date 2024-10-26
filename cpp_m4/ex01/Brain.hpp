@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.cpp                                            :+:      :+:    :+:   */
+/*   Brain.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/26 13:26:03 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/10/26 15:40:37 by yzaytoun         ###   ########.fr       */
+/*   Created: 2024/10/26 15:57:28 by yzaytoun          #+#    #+#             */
+/*   Updated: 2024/10/26 17:37:57 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cat.hpp"
+#pragma	once
 
-Cat::Cat() : _type("Cat")
-{
-	std::cout << "Cat constructor called" << std::endl;
-}
+#include <iostream>
+#include <string>
 
-Cat::~Cat()
+class Brain
 {
-	std::cout << "Cat destructor called" << std::endl;
-}
+	private:
+		std::string	ideas[100];
 
-void	Cat::makeSound(void) const
-{
-	std::cout << "miaow!!" << std::endl;
-}
+	public:
+		Brain();
+		~Brain();
+		Brain(const Brain& brain);
+	
+	std::string	getIdea(int idx);
+	void		setIdea(const int idx, const std::string idea);
+};
 
-std::string	Cat::getType(void) const
-{
-	return (this->_type);
-}

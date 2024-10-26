@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   WrongCat.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/25 15:43:15 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/25 16:59:40 by yzaytoun         ###   ########.fr       */
+/*   Created: 2024/10/26 15:48:16 by yzaytoun          #+#    #+#             */
+/*   Updated: 2024/10/26 15:48:47 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ZOMBIE_HPP
-# define ZOMBIE_HPP
+#pragma once
 
-#include <string>
-#include <iostream>
+#include "WrongAnimal.hpp"
 
-class Zombie
+class WrongCat : virtual public WrongAnimal
 {
 	private:
-		std::string	name;
-	
+		std::string	_type;
 	public:
-		Zombie(std::string);
-		~Zombie();
-		void	announce(void);
+		WrongCat();
+		~WrongCat();
+	
+	std::string	getType(void) const;
+	void		makeSound(void) const;
 };
-
-void	PrintString(std::string argument);
-Zombie	*newZombie(std::string name);
-void	randomChump(std::string name);
-
-#endif

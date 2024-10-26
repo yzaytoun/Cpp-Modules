@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 13:33:30 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/10/26 13:50:03 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/10/26 15:41:24 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ class Dog : virtual public Animal
 		Dog();
 		~Dog();
 	
-	void	makeSound(void) const;
+	std::string	getType(void) const;
+	void		makeSound(void) const;
 };

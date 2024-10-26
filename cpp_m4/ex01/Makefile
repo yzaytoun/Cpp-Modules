@@ -6,15 +6,15 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/25 12:21:00 by yzaytoun          #+#    #+#              #
-#    Updated: 2024/10/26 15:47:59 by yzaytoun         ###   ########.fr        #
+#    Updated: 2024/10/26 15:55:21 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = a.out
 
-INC = -IAnimal.hpp -IDog.hpp -ICat.hpp -IWrongCat.cpp -IWrongAnimal.cpp
+INC = -IAnimal.hpp -IDog.hpp -ICat.hpp -IWrongCat.cpp -IWrongAnimal.cpp -IBrain.hpp
 
-SRC = main.cpp Animal.cpp Dog.cpp Cat.cpp WrongCat.cpp WrongAnimal.cpp
+SRC = main.cpp Animal.cpp Dog.cpp Cat.cpp WrongCat.cpp WrongAnimal.cpp Brain.cpp
 
 CPPFLAGS := -Wall -Wextra -Werror -std=c++98 $(INC) -g
 

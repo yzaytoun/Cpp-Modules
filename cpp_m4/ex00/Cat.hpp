@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 13:26:26 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/10/26 13:52:57 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/10/26 15:40:48 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ class Cat : virtual public Animal
 		Cat();
 		~Cat();
 	
-	void	makeSound(void) const;
+	std::string	getType(void) const;
+	void		makeSound(void) const;
 };
