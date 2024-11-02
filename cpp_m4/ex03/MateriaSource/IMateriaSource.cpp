@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   WrongCat.hpp                                       :+:      :+:    :+:   */
+/*   IMateriaSource.cpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/26 15:48:16 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/10/26 15:48:47 by yzaytoun         ###   ########.fr       */
+/*   Created: 2024/11/02 18:26:42 by yzaytoun          #+#    #+#             */
+/*   Updated: 2024/11/02 19:27:32 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#include "IMateriaSource.hpp"
 
-#include "WrongAnimal.hpp"
-
-class WrongCat : virtual public WrongAnimal
+IMateriaSource::IMateriaSource(/* args */)
 {
-	private:
-		std::string	_type;
-	public:
-		WrongCat();
-		~WrongCat();
-	
-	std::string	getType(void) const;
-	void		makeSound(void) const;
-};
+}
+
+IMateriaSource::~IMateriaSource()
+{
+}
