@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 18:24:18 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/11/02 20:36:50 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/11/05 19:02:55 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,8 @@
 
 class ICharacter
 {
-	protected:
-		std::string	_name;
-		AMateria	_inventory[4];
-
 	public:
-		ICharacter(std::string const name);
-		virtual ~ICharacter() {}
+		virtual ~ICharacter() {};
 		virtual std::string const & getName() const = 0;
 		virtual void equip(AMateria* m) = 0;
 		virtual void unequip(int idx) = 0;

@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/25 12:21:00 by yzaytoun          #+#    #+#              #
-#    Updated: 2024/11/02 20:31:15 by yzaytoun         ###   ########.fr        #
+#    Updated: 2024/11/05 19:03:49 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,6 @@ NAME = a.out
 INC = include/
 
 SRC =
-	ICharacter.cpp\
 	Character.cpp\
 	AMateria.cpp\
 	Cure.cpp\

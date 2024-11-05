@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ICharacter.cpp                                     :+:      :+:    :+:   */
+/*   iter.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/02 18:24:03 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/11/02 20:22:59 by yzaytoun         ###   ########.fr       */
+/*   Created: 2024/11/05 19:33:52 by yzaytoun          #+#    #+#             */
+/*   Updated: 2024/11/05 19:42:36 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ICharacter.hpp"
+#include "Character.hpp"
 
-ICharacter::ICharacter(std::string const name) : _name(name)
+void	to_null(AMateria *mat)
 {
+	mat = NULL;
 }
 
+void	equip_mat(AMateria *mat)
+{
+	if (!mat)
+		mat = 
+}

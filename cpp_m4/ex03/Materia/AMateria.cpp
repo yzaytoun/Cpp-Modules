@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 18:19:32 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/11/02 19:48:58 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/11/05 19:51:36 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,8 @@ std::string const &	AMateria::getType() const
 	return (this->_type);
 }
 
-void	AMateria::use(ICharacter& target) {}
+void	AMateria::use(ICharacter& target)
+{
+	this->target = target;
+	std::cout << "Material is used by " << target.getName() << std::endl;
+}

@@ -6,11 +6,13 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 12:20:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/11/02 18:18:46 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/11/05 18:59:39 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AMateria.hpp"
+#include "Ice.hpp"
+#include "Cure.hpp"
 
 int main()
 {
