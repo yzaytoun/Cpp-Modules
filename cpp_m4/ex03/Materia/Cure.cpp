@@ -12,19 +12,19 @@
 
 #include "Cure.hpp"
 
-Cure::Cure() : _type("cure")
+Cure::Cure() : AMateria("cure"), _type("cure")
 {
-	std::cout << "Cure constructor called" << std::endl;
+	//std::cout << "Cure constructor called" << std::endl;
 }
 
-Cure::Cure(std::string const & type) : _type(type)
+Cure::Cure(std::string const & type) : AMateria(type), _type(type)
 {
-	std::cout << "Cure constructor called" << std::endl;
+	//std::cout << "Cure constructor called" << std::endl;
 }
 
 Cure::~Cure()
 {
-	std::cout << "Cure destructor called" << std::endl;
+	//std::cout << "Cure destructor called" << std::endl;
 }
 
 AMateria* Cure::clone() const

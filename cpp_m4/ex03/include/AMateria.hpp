@@ -20,7 +20,6 @@ class AMateria
 {
 	protected:
 		std::string	_type;
-		ICharacter&	target;
 	public:
 		AMateria();
 		AMateria(std::string const & type);

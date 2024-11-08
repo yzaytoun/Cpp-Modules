@@ -15,16 +15,18 @@
 #include <iostream>
 #include <string>
 #include "IMateriaSource.hpp"
+#include "Ice.hpp"
+#include "Cure.hpp"
 
-class MateriaSource : IMateriaSource
+class MateriaSource : public IMateriaSource
 {
 	private:
-		std::string	name;
+		AMateria	*_inventory[4];
 
 	public:
 		MateriaSource();
 		~MateriaSource();
-		
-		virtual void learnMateria(AMateria*);
-		virtual AMateria* createMateria(std::string const & type);
+
+	void learnMateria(AMateria* mat);
+	AMateria* createMateria(std::string const & type);
 };

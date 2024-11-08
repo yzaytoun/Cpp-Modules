@@ -10,23 +10,21 @@
 #                                                                              #
 # **************************************************************************** #
 
-vpath %.cpp Character Materia MateriaSource
+vpath %.cpp Character : Materia : MateriaSource
 vpath %.hpp include
 
 NAME = a.out
 
-INC = include/
+INCLUDE = -Iinclude
 
-SRC =
-	Character.cpp\
+SRC = Character.cpp\
 	AMateria.cpp\
 	Cure.cpp\
 	Ice.cpp\
-	IMateriaSource.cpp\
 	MateriaSource.cpp\
 	main.cpp
 
-CPPFLAGS := -Wall -Wextra -Werror -std=c++98 $(INC) -g
+CPPFLAGS := -Wall -Wextra -Werror -std=c++98 $(INCLUDE) -g
 
 CXX := c++
 

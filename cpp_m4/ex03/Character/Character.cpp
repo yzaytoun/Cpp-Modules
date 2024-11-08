@@ -14,13 +14,20 @@
 
 Character::Character(std::string const name) : _name(name)
 {
-	std::cout << "Character constructor called" << std::endl;
+	int idx = 0;
+
+    while (idx < 4)
+    {
+        this->_inventory[idx] = NULL;
+        ++idx;
+    }
+	//std::cout << "Character constructor called" << std::endl;
 }
 
 std::string const & Character::getName() const
 {
 	return (this->_name);
-	std::cout << "Character destructor called" << std::endl;
+	//std::cout << "Character destructor called" << std::endl;
 }
 
 void Character::equip(AMateria* m)
@@ -30,7 +37,11 @@ void Character::equip(AMateria* m)
 	while (idx < 4)
 	{
 		if (!this->_inventory[idx])
+		{
 			this->_inventory[idx] = m;
+			break ;
+		}
+		++idx;
 	}
 }
 
@@ -52,7 +63,7 @@ void Character::use(int idx, ICharacter& target)
 
 	while (i < 4)
 	{
-		if (i == idx)
+		if (i == idx && this->_inventory[idx])
 			this->_inventory[idx]->use(target);
 		++i;
 	}

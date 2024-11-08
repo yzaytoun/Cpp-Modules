@@ -12,19 +12,19 @@
 
 #include "Ice.hpp"
 
-Ice::Ice() : _type("ice")
+Ice::Ice() : AMateria("ice"), _type("ice")
 {
-	std::cout << "Ice constructor called" << std::endl;
+	//std::cout << "Ice constructor called" << std::endl;
 }
 
-Ice::Ice(std::string const & type) : _type(type)
+Ice::Ice(std::string const & type) : AMateria(type), _type(type)
 {
-	std::cout << "Ice constructor called" << std::endl;
+	//std::cout << "Ice constructor called" << std::endl;
 }
 
 Ice::~Ice()
 {
-	std::cout << "Ice destructor called" << std::endl;
+	//std::cout << "Ice destructor called" << std::endl;
 }
 
 AMateria* Ice::clone() const

@@ -12,19 +12,54 @@
 
 #include "MateriaSource.hpp"
 
-MateriaSource::MateriaSource(/* args */)
+MateriaSource::MateriaSource()
 {
+    int idx = 0;
+
+    while (idx < 4)
+    {
+        this->_inventory[idx] = NULL;
+        ++idx;
+    }
+    //std::cout << "MateriaSource constructor called" << std::endl;
 }
 
 MateriaSource::~MateriaSource()
 {
+    int idx = 0;
+
+    while (idx < 4)
+    {
+        delete this->_inventory[idx];
+        ++idx;
+    }
+    //std::cout << "MateriaSource destructor called" << std::endl;
 }
 
-void MateriaSource::learnMateria(AMateria*)
+void MateriaSource::learnMateria(AMateria* mat)
 {
-	
+    int idx = 0;
+
+    while (idx < 4)
+    {
+        if (!this->_inventory[idx])
+        {
+            this->_inventory[idx] = mat->clone();
+            break ;
+        }
+        ++idx;
+    }
+    
 }
 AMateria* MateriaSource::createMateria(std::string const & type)
 {
-	
+    int idx = 0;
+
+    while (idx < 4)
+    {
+        if (this->_inventory[idx]->getType() == type)
+            return(this->_inventory[idx]->clone());
+        ++idx;
+    }
+	return (NULL);
 }

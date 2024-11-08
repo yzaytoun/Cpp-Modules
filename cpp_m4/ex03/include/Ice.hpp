@@ -25,6 +25,6 @@ class Ice : virtual public AMateria
 		Ice(std::string const & type);
 		~Ice();
 	
-	virtual AMateria* clone() const;
-	virtual void use(ICharacter& target);
+	AMateria* clone() const;
+	void use(ICharacter& target);
 };
