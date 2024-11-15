@@ -75,58 +75,58 @@ int		Fixed::toInt(void) const
 	);
 }
 
-bool	Fixed::operator<(const Fixed& f1)
+bool	Fixed::operator<(const Fixed& f1) const
 {
 	return (f1.toFloat() < this->toFloat());
 }
 
-bool	Fixed::operator>(const Fixed& f1)
+bool	Fixed::operator>(const Fixed& f1) const
 {
 	return (f1.toFloat() > this->toFloat());
 }
 
-bool	Fixed::operator<=(const Fixed& f1)
+bool	Fixed::operator<=(const Fixed& f1) const
 {
 	return (f1.toFloat() <= this->toFloat());
 }
 
-bool	Fixed::operator>=(const Fixed& f1)
+bool	Fixed::operator>=(const Fixed& f1) const
 {
 	return (f1.toFloat() >= this->toFloat());
 }
 
-bool	Fixed::operator==(const Fixed& f1)
+bool	Fixed::operator==(const Fixed& f1) const
 {
 	return (f1.toFloat() == this->toFloat());
 }
 
-bool	Fixed::operator!=(const Fixed& f1)
+bool	Fixed::operator!=(const Fixed& f1) const
 {
 	return (f1.toFloat() != this->toFloat());
 }
 
-Fixed	Fixed::operator+(const Fixed& f1)
+Fixed	Fixed::operator+(const Fixed& f1) const
 {
 	Fixed	res(f1.toFloat() + this->toFloat());
 	
 	return (res);
 }
 
-Fixed	Fixed::operator-(const Fixed& f1)
+Fixed	Fixed::operator-(const Fixed& f1) const
 {
 	Fixed	res(f1.toFloat() - this->toFloat());
 	
 	return (res);
 }
 
-Fixed	Fixed::operator/(const Fixed& f1)
+Fixed	Fixed::operator/(const Fixed& f1) const
 {
 	Fixed	res(f1.toFloat() / this->toFloat());
 	
 	return (res);
 }
 
-Fixed	Fixed::operator*(const Fixed& f1)
+Fixed	Fixed::operator*(const Fixed& f1) const
 {
 	Fixed	res(f1.toFloat() * this->toFloat());
 
@@ -136,30 +136,30 @@ Fixed	Fixed::operator*(const Fixed& f1)
 const Fixed&	Fixed::operator++()
 {
 	this->_fixed_point++;
-	return (f);
+	return (*this);
 }
 
 const Fixed&	Fixed::operator--()
 {
 	this->_fixed_point--;
-	return (f);
+	return (*this);
 }
 
-const Fixed	Fixed::operator++(int i)
+const Fixed		Fixed::operator++(int i)
 {
 	(void)i;
 	Fixed	before = *this;
 
-	f._fixed_point++;
+	this->_fixed_point++;
 	return (before);
 }
 
-const Fixed	Fixed::operator--(Fixed& f, int i)
+const Fixed		Fixed::operator--(int i)
 {
 	(void)i;
-	Fixed	before(f);
+	Fixed	before = *this;
 
-	f._fixed_point--;
+	this->_fixed_point--;
 	return (before);
 }
 

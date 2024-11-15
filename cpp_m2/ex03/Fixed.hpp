@@ -30,17 +30,17 @@ class Fixed
 	
 		Fixed&					operator=(const Fixed& f);
 		
-		bool 			operator<(const Fixed& f1);
-		bool 			operator>(const Fixed& f1);
-		bool 			operator<=(const Fixed& f1);
-		bool 			operator>=(const Fixed& f1);
-		bool 			operator==(const Fixed& f1);
-		bool 			operator!=(const Fixed& f1);
+		bool 			operator<(const Fixed& f1) const;
+		bool 			operator>(const Fixed& f1) const;
+		bool 			operator<=(const Fixed& f1) const;
+		bool 			operator>=(const Fixed& f1) const;
+		bool 			operator==(const Fixed& f1) const;
+		bool 			operator!=(const Fixed& f1) const;
 	
-		Fixed 			operator+(const Fixed& f1);
-		Fixed 			operator-(const Fixed& f1);
-		Fixed 			operator/(const Fixed& f1);
-		Fixed 			operator*(const Fixed& f1);
+		Fixed 			operator+(const Fixed& f1) const;
+		Fixed 			operator-(const Fixed& f1) const;
+		Fixed 			operator/(const Fixed& f1) const;
+		Fixed 			operator*(const Fixed& f1) const;
 
 		const Fixed& 	operator++();
 		const Fixed& 	operator--();
@@ -59,4 +59,4 @@ class Fixed
 };
 
 std::ostream&	operator<<(std::ostream &out, const Fixed &f);
-void	print(std::string str, int endl);
+void			print(std::string str, int endl);
