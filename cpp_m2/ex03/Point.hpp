@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 18:20:34 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/10/04 18:32:02 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/11/15 18:26:22 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,15 @@ class Point
 		Fixed	getY(void) const;
 
 		Point&		operator=(const Point& p);
-		
-		friend bool	operator!=(const Point& p1, const Point p2);
-		friend bool	operator==(const Point& p1, const Point p2);
-		friend bool	operator<(const Point& p1, const Point p2);
-		friend bool	operator>(const Point& p1, const Point p2);
-		friend bool	operator<=(const Point& p1, const Point p2);
-		friend bool	operator>=(const Point& p1, const Point p2);
-	
-		friend std::ostream&	operator<<(std::ostream& out, const Point& p);
+		bool		operator!=(const Point& p1);
+		bool		operator==(const Point& p1);
+		bool		operator<(const Point& p1);
+		bool		operator>(const Point& p1);
+		bool		operator<=(const Point& p1);
+		bool		operator>=(const Point& p1);	
 };
 
+std::ostream&	operator<<(std::ostream& out, const Point& p);
 /*
 	@param a,b,c vertices of the triangle
 	@param point the point to check

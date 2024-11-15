@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 12:20:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/10/04 18:36:24 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/11/15 18:35:35 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int main( void )
 	Point	p2(1, 1);
 	Point	p3(1, 5);
 	Point	p4(3, 3);
+
 
 	std::cout << bsp(p1, p2, p3, p4) << std::endl;
 	Point	pp(-1, -10);

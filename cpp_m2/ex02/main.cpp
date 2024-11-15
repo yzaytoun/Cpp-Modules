@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 12:20:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/10/01 19:34:39 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/11/15 18:24:59 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	print(std::string str, int endl)
 
 int main( void )
 {
-	Fixed a;
+	Fixed a(22);
 	Fixed s((float)0.1);
 	Fixed d((float)0.12);
 	Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
@@ -33,6 +33,7 @@ int main( void )
 	std::cout << a << std::endl;
 	std::cout << a++ << std::endl;
 	std::cout << a << std::endl;
+	std::cout << (a == a) << std::endl;
 	std::cout << (a != a) << std::endl;
 	std::cout << (a == b) << std::endl;
 	

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 16:54:14 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/10/03 18:17:31 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/11/15 18:22:25 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,91 +75,91 @@ int		Fixed::toInt(void) const
 	);
 }
 
-bool	operator<(const Fixed& f1, const Fixed& f2)
+bool	Fixed::operator<(const Fixed& f1) const
 {
-	return (f1.toFloat() < f2.toFloat());
+	return (f1.toFloat() < this->toFloat());
 }
 
-bool	operator>(const Fixed& f1, const Fixed& f2)
+bool	Fixed::operator>(const Fixed& f1) const
 {
-	return (f1.toFloat() > f2.toFloat());
+	return (f1.toFloat() > this->toFloat());
 }
 
-bool	operator<=(const Fixed& f1, const Fixed& f2)
+bool	Fixed::operator<=(const Fixed& f1) const
 {
-	return (f1.toFloat() <= f2.toFloat());
+	return (f1.toFloat() <= this->toFloat());
 }
 
-bool	operator>=(const Fixed& f1, const Fixed& f2)
+bool	Fixed::operator>=(const Fixed& f1) const
 {
-	return (f1.toFloat() >= f2.toFloat());
+	return (f1.toFloat() >= this->toFloat());
 }
 
-bool	operator==(const Fixed& f1, const Fixed& f2)
+bool	Fixed::operator==(const Fixed& f1) const
 {
-	return (f1.toFloat() == f2.toFloat());
+	return (f1.toFloat() == this->toFloat());
 }
 
-bool	operator!=(const Fixed& f1, const Fixed& f2)
+bool	Fixed::operator!=(const Fixed& f1) const
 {
-	return (f1.toFloat() != f2.toFloat());
+	return (f1.toFloat() != this->toFloat());
 }
 
-Fixed	operator+(const Fixed& f1, const Fixed& f2)
+Fixed	Fixed::operator+(const Fixed& f1) const
 {
-	Fixed	res(f1.toFloat() + f2.toFloat());
+	Fixed	res(f1.toFloat() + this->toFloat());
 	
 	return (res);
 }
 
-Fixed	operator-(const Fixed& f1, const Fixed& f2)
+Fixed	Fixed::operator-(const Fixed& f1) const
 {
-	Fixed	res(f1.toFloat() - f2.toFloat());
+	Fixed	res(f1.toFloat() - this->toFloat());
 	
 	return (res);
 }
 
-Fixed	operator/(const Fixed& f1, const Fixed& f2)
+Fixed	Fixed::operator/(const Fixed& f1) const
 {
-	Fixed	res(f1.toFloat() / f2.toFloat());
+	Fixed	res(f1.toFloat() / this->toFloat());
 	
 	return (res);
 }
 
-Fixed	operator*(const Fixed& f1, const Fixed& f2)
+Fixed	Fixed::operator*(const Fixed& f1) const
 {
-	Fixed	res(f1.toFloat() * f2.toFloat());
+	Fixed	res(f1.toFloat() * this->toFloat());
 
 	return (res);
 }
 
-const Fixed&	operator++(Fixed& f)
+const Fixed&	Fixed::operator++()
 {
-	f._fixed_point++;
-	return (f);
+	this->_fixed_point++;
+	return (*this);
 }
 
-const Fixed&	operator--(Fixed& f)
+const Fixed&	Fixed::operator--()
 {
-	f._fixed_point--;
-	return (f);
+	this->_fixed_point--;
+	return (*this);
 }
 
-const Fixed	operator++(Fixed& f, int i)
+const Fixed		Fixed::operator++(int i)
 {
 	(void)i;
-	Fixed	before(f);
+	Fixed	before = *this;
 
-	f._fixed_point++;
+	this->_fixed_point++;
 	return (before);
 }
 
-const Fixed	operator--(Fixed& f, int i)
+const Fixed	Fixed::operator--(int i)
 {
 	(void)i;
-	Fixed	before(f);
+	Fixed	before = *this;
 
-	f._fixed_point--;
+	this->_fixed_point--;
 	return (before);
 }
 

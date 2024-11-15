@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 16:48:34 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/10/01 19:32:38 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/11/15 18:30:01 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,24 @@ class Fixed
 		Fixed(float const integer);
 		~Fixed();
 	
-		friend std::ostream&	operator<<(std::ostream &out, const Fixed &f);
-		Fixed&					operator=(const Fixed& f);
+		Fixed&			operator=(const Fixed& f);
 		
-		friend bool 			operator<(const Fixed& f1, const Fixed& f2);
-		friend bool 			operator>(const Fixed& f1, const Fixed& f2);
-		friend bool 			operator<=(const Fixed& f1, const Fixed& f2);
-		friend bool 			operator>=(const Fixed& f1, const Fixed& f2);
-		friend bool 			operator==(const Fixed& f1, const Fixed& f2);
-		friend bool 			operator!=(const Fixed& f1, const Fixed& f2);
+		bool 			operator<(const Fixed& f1) const;
+		bool 			operator>(const Fixed& f1) const;
+		bool 			operator<=(const Fixed& f1) const;
+		bool 			operator>=(const Fixed& f1) const;
+		bool 			operator==(const Fixed& f1) const;
+		bool 			operator!=(const Fixed& f1) const;
 	
-		friend Fixed 			operator+(const Fixed& f1, const Fixed& f2);
-		friend Fixed 			operator-(const Fixed& f1, const Fixed& f2);
-		friend Fixed 			operator/(const Fixed& f1, const Fixed& f2);
-		friend Fixed 			operator*(const Fixed& f1, const Fixed& f2);
+		Fixed 			operator+(const Fixed& f1) const;
+		Fixed 			operator-(const Fixed& f1) const;
+		Fixed 			operator/(const Fixed& f1) const;
+		Fixed 			operator*(const Fixed& f1) const;
 
-		friend const Fixed& 	operator++(Fixed& f);
-		friend const Fixed& 	operator--(Fixed& f);
-		friend const Fixed 		operator++(Fixed& f, int i);
-		friend const Fixed 		operator--(Fixed& f, int i);
+		const Fixed& 	operator++();
+		const Fixed& 	operator--();
+		const Fixed 	operator++(int i);
+		const Fixed 	operator--(int i);
 
 		static const Fixed&		min(const Fixed& f1, const Fixed& f2);
 		static const Fixed&		min(Fixed& f1, Fixed& f2);
@@ -59,4 +58,5 @@ class Fixed
 		int		toInt(void) const;
 };
 
+std::ostream&	operator<<(std::ostream &out, const Fixed &f);
 void	print(std::string str, int endl);
