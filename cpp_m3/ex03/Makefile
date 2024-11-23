@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/25 12:21:00 by yzaytoun          #+#    #+#              #
-#    Updated: 2024/10/26 13:12:51 by yzaytoun         ###   ########.fr        #
+#    Updated: 2024/11/23 15:30:49 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ INC = -IClapTrap.hpp -IScavTrap.hpp -IFragTrap.hpp -IDiamondTrap.hpp
 
 SRC = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
 
-CPPFLAGS := -Wall -Wextra -Werror -std=c++98 $(INC) -g
+CPPFLAGS := -Wall -Wextra -Werror -Wshadow -Wno-shadow -std=c++98 $(INC) -g
 
 CXX := c++
 
