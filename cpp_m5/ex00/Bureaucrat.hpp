@@ -13,17 +13,45 @@
 #pragma once
 
 #include <iostream>
+#include <sstream>
 #include <string>
+#include <exception>
 
 class Bureaucrat
 {
-	protected:
-		std::string	_type;
+	enum Grade
+	{
+		TOO_HIGH = -1,
+		TOO_LOW,
+		VALID
+	};
+
+	private:
+		std::string	_name;
+		int					_grade;
 	public:
-		Bureaucrat();
-		virtual ~Bureaucrat();
+		Bureaucrat(std::string name);
+		~Bureaucrat();
 		Bureaucrat(const Bureaucrat& Bureaucrat);
+		Bureaucrat&		operator=(const Bureaucrat& bureaucrat);
 	
-	virtual std::string		getType(void) const;
-	virtual void			makeSound(void) const;
+	Bureaucrat::Grade	IsValidGrade(int grade) const;
+	std::string			getName(void) const;
+	int					getGrade(void) const;
+	void				incrementGrade(int amount);
+	void				decrementGrade(int amount);
+	
+	/* Exceptions */
+	class	GradeTooHighException: std::exception
+	{
+		public:
+			const char *	what(int grade) throw();
+	};
+
+	class	GradeTooLowException : std::exception
+	{
+		public:
+			const char*		what(int grade) throw();
+	};
 };
+std::ostream&	operator<<(std::ostream& out ,const Bureaucrat& bureaucrat);
