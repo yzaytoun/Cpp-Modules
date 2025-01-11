@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 13:29:49 by yzaytoun          #+#    #+#             */
-/*   Updated: 2025/01/11 18:29:55 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2025/01/11 18:48:35 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,8 @@ Bureaucrat&	Bureaucrat::operator=(const Bureaucrat& bureaucrat)
 std::ostream&	operator<<(std::ostream& out ,const Bureaucrat& bureaucrat)
 {
 	out << "\n-------------------\n"
-		<< "Bureacurat: "
 		<< bureaucrat.getName()
-		<< " | Grade "
+		<< ", bureacurate grade "
 		<< bureaucrat.getGrade()
 		<< "\n-------------------\n";
 	return (out);
@@ -94,4 +93,32 @@ void	Bureaucrat::decrementGrade(int amount)
 {
 	validateGrade(_grade + amount);
 	_grade += amount;
+}
+
+void	Bureaucrat::signForm(Form& form)
+{
+	if (!form.isSigned())
+	{
+		try
+		{
+			form.beSigned(*this);
+			std::cout << this->getName() << " signed " << form.getName() << std::endl;
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr
+				<< this->getName() << " couldn't sign " << form.getName()
+				<< " because "
+				<< e.what()
+				<< std::endl;
+		}
+	}
+	else
+	{
+		std::cerr
+			<< this->getName() << " couldn't sign " << form.getName()
+			<< " because "
+			<< "form is already signed"
+			<< std::endl;
+	}
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Bureaucrat.hpp                                         :+:      :+:    :+:   */
+/*   AForm.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/26 13:31:01 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/10/26 15:43:54 by yzaytoun         ###   ########.fr       */
+/*   Created: 2025/01/11 19:15:31 by yzaytoun          #+#    #+#             */
+/*   Updated: 2025/01/11 20:10:51 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,13 @@
 #include <sstream>
 #include <string>
 #include <exception>
+#include "Bureaucrat.hpp"
 
-class Bureaucrat
+typedef	const unsigned short	t_grade;
+
+class Bureaucrat;
+
+class AForm
 {
 	enum Grade
 	{
@@ -28,20 +33,29 @@ class Bureaucrat
 
 	private:
 		std::string		_name;
-		unsigned short	_grade;
+		std::string		_target;
+		bool			_is_signed;
+		unsigned short	_grade_tosign;
+		unsigned short	_grade_toexecute;
 		
-		void				validateGrade(unsigned short grade) const;
-		Bureaucrat::Grade	IsValidGrade(int grade) const;
+		void			validateGrade(unsigned short grade) const;
+		AForm::Grade	IsValidGrade(unsigned short grade) const;
+		bool			canSign(t_grade grade) const;
+		bool			canExecute(t_grade grade) const;
 	public:
-		Bureaucrat(const std::string name, unsigned short grade);
-		~Bureaucrat();
-		Bureaucrat(const Bureaucrat& Bureaucrat);
-		Bureaucrat&		operator=(const Bureaucrat& bureaucrat);
+		AForm(const std::string name, t_grade grade_tosign, t_grade grade_toexecute, std::string target);
+		virtual ~AForm();
+		AForm(const AForm& form);
+		AForm&		operator=(const AForm& form);
 	
 		std::string			getName(void) const;
-		int					getGrade(void) const;
-		void				incrementGrade(int amount);
-		void				decrementGrade(int amount);
+		std::string			getTarget(void) const;
+		bool				isSigned(void) const;
+		unsigned short		getGradeToSign(void) const;
+		unsigned short		getGradeToExecute(void) const;
+		void				beSigned(const Bureaucrat& b);
+		void				execute(Bureaucrat const & executor) const;
+		virtual void		formAction(void) const;
 	
 	/* Exceptions */
 	class	GradeTooHighException: public std::exception
@@ -63,4 +77,4 @@ class Bureaucrat
 	};
 };
 
-std::ostream&	operator<<(std::ostream& out ,const Bureaucrat& bureaucrat);
+std::ostream&	operator<<(std::ostream& out ,const AForm& form);
