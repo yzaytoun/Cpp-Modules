@@ -11,17 +11,19 @@
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "ShrubberyCreationForm.hpp"
-#include "RobotomyRequestForm.hpp"
-#include "PresidentialPardonForm.hpp"
+#include "Intern.hpp"
+
 
 int main( void )
 {
 	Bureaucrat	b("Burea", 20);
 	Bureaucrat	pres("PRES", 1);
-	ShrubberyCreationForm 	f1("target");
-	RobotomyRequestForm		f2("target");
-	PresidentialPardonForm	f3("target");
+
+	{
+		Intern someRandomIntern;
+		AForm* rrf;
+		rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+	}
 
 	std::cout << "Executing form without signing " << std::endl;
 	b.executeForm(f1);

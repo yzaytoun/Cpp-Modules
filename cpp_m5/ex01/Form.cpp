@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.cpp                                     :+:      :+:    :+:   */
+/*   Form.cpp                                    	    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,6 +11,11 @@
 /* ************************************************************************** */
 
 #include "Form.hpp"
+
+Form::Form() : _name("Form"), _is_signed(false), _grade_tosign(MIN_GRADE) ,_grade_toexecute(MIN_GRADE)
+{
+	std::cout << "Form default constructor called" << std::endl;
+}
 
 Form::Form(const std::string name, t_grade grade_tosign, t_grade grade_toexecute)
 	: _name(name), _is_signed(false), _grade_tosign(grade_tosign)
@@ -38,11 +43,7 @@ Form::Form(const Form& form)
 Form&	Form::operator=(const Form& Form)
 {
 	if (this != &Form)
-	{
-		_name = Form.getName();
-		_grade_toexecute = Form.getGradeToExecute();
-		_grade_tosign = Form.getGradeToSign();
-	}
+		_is_signed = Form.isSigned();
 	return (*this);
 	std::cout << "Form assignment operator called" << std::endl;
 }
@@ -50,13 +51,12 @@ Form&	Form::operator=(const Form& Form)
 std::ostream&	operator<<(std::ostream& out ,const Form& Form)
 {
 	out << "\n-------------------\n"
-		<< "Form: "
+		<< "Form -> name: "
 		<< Form.getName()
 		<< " | Grade to execute: "
 		<< Form.getGradeToExecute()
 		<< " | Grade to sign: "
 		<< Form.getGradeToSign()
-		<< " | "
 		<< "\n-------------------\n";
 	return (out);
 }
@@ -65,14 +65,14 @@ std::ostream&	operator<<(std::ostream& out ,const Form& Form)
 
 Form::Grade	Form::IsValidGrade(unsigned short grade) const
 {
-	if (grade > 150)
+	if (grade > MIN_GRADE)
 		return (TOO_LOW);
-	else if (grade < 1)
+	else if (grade < MAX_GRADE)
 		return (TOO_HIGH);
 	return (VALID);
 }
 
-std::string	Form::getName(void) const
+const std::string	Form::getName(void) const
 {
 	return (_name);
 }
@@ -109,14 +109,13 @@ bool	Form::canSign(t_grade grade) const
 
 bool	Form::canExecute(t_grade grade) const
 {
-	if (grade <= _grade_toexecute)
+	if (grade <= _grade_toexecute && _is_signed)
 		return (true);
 	return (false);
 }
 
 void	Form::validateGrade(unsigned short grade) const
 {
-	std::cout << grade << std::endl;
 	switch (this->IsValidGrade(grade))
 	{
 		case TOO_HIGH: 	throw Form::GradeTooHighException();

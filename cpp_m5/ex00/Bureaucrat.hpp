@@ -17,6 +17,9 @@
 #include <string>
 #include <exception>
 
+#define MIN_GRADE	150
+#define MAX_GRADE	1
+
 class Bureaucrat
 {
 	enum Grade
@@ -27,21 +30,22 @@ class Bureaucrat
 	};
 
 	private:
-		std::string		_name;
-		unsigned short	_grade;
+		std::string	const	_name;
+		unsigned short		_grade;
 		
 		void				validateGrade(unsigned short grade) const;
 		Bureaucrat::Grade	IsValidGrade(int grade) const;
 	public:
+		Bureaucrat();
 		Bureaucrat(const std::string name, unsigned short grade);
 		~Bureaucrat();
 		Bureaucrat(const Bureaucrat& Bureaucrat);
 		Bureaucrat&		operator=(const Bureaucrat& bureaucrat);
 	
-		std::string			getName(void) const;
-		int					getGrade(void) const;
-		void				incrementGrade(int amount);
-		void				decrementGrade(int amount);
+		const std::string			getName(void) const;
+		int							getGrade(void) const;
+		void						incrementGrade(int amount);
+		void						decrementGrade(int amount);
 	
 	/* Exceptions */
 	class	GradeTooHighException: public std::exception

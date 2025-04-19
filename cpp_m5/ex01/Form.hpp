@@ -32,26 +32,27 @@ class Form
 	};
 
 	private:
-		std::string		_name;
-		bool			_is_signed;
-		unsigned short	_grade_tosign;
-		unsigned short	_grade_toexecute;
+		std::string	const			_name;
+		bool						_is_signed;
+		unsigned short const		_grade_tosign;
+		unsigned short const		_grade_toexecute;
 		
 		void		validateGrade(unsigned short grade) const;
 		Form::Grade	IsValidGrade(unsigned short grade) const;
 		bool		canSign(t_grade grade) const;
 		bool		canExecute(t_grade grade) const;
 	public:
+		Form();
 		Form(const std::string name, t_grade grade_tosign, t_grade grade_toexecute);
 		~Form();
 		Form(const Form& form);
 		Form&		operator=(const Form& Form);
 	
-		std::string			getName(void) const;
-		bool				isSigned(void) const;
-		unsigned short		getGradeToSign(void) const;
-		unsigned short		getGradeToExecute(void) const;
-		void				beSigned(const Bureaucrat& b);
+		const std::string		getName(void) const;
+	 	unsigned short			getGradeToSign(void) const;
+	 	unsigned short			getGradeToExecute(void) const;
+		bool					isSigned(void) const;
+		void					beSigned(const Bureaucrat& b);
 	
 	/* Exceptions */
 	class	GradeTooHighException: public std::exception
