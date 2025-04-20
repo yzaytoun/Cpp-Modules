@@ -12,12 +12,7 @@
 
 #include "Intern.hpp"
 
-Intern::Intern() : _name("intern")
-{
-	std::cout << "Intern constructor called" << std::endl;
-}
-
-Intern::Intern(const std::string name, unsigned short grade) : _name(name)
+Intern::Intern()
 {
 	std::cout << "Intern constructor called" << std::endl;
 }
@@ -27,43 +22,52 @@ Intern::~Intern()
 	std::cout << "Intern destructor called" << std::endl;
 }
 
-Intern::Intern(const Intern& intern) : _name(intern.getName())
+Intern::Intern(const Intern& intern)
 {
+	(void)intern;
 	std::cout << "Intern Copy constructor called" << std::endl;
 }
 
-const std::string	Intern::getName(void) const
-{
-	return (_name);
-}
-
-AForm*	Intern::makeForm(const std::string form_name, const std::string target)
-{
-	AForm*	forms[3] = {
-		ShrubberyCreationForm,
-		RobotomyRequestForm,
-		PresidentialPardonForm
-	};
-
-	return (forms[idx]);
-}
-
-/*	Operators */
-
 Intern&	Intern::operator=(const Intern& intern)
 {
-	if (this != &intern)
-		_grade = intern.getGrade();
+	(void) intern;
 	return (*this);
 	std::cout << "Intern assignment operator called" << std::endl;
 }
 
-std::ostream&	operator<<(std::ostream& out ,const Intern& intern)
+Intern::Forms	getFormToken(const std::string form_name)
 {
-	out << "\n-------------------\n"
-		<< Intern.getName()
-		<< ", bureacurate grade "
-		<< Intern.getGrade()
-		<< "\n-------------------\n";
-	return (out);
+	std::string	forms[3] = {
+		"shrubbery",
+		"robotomy request",
+		"presidential pardon"
+	};
+	Intern::Forms	token = Intern::FormsCount;
+
+	for (int i = 0; i < Intern::FormsCount; i++)
+	{
+		if (forms[i].compare(form_name) == 0)
+		{
+			token = static_cast<Intern::Forms>(i);
+			break;
+		}
+	}
+	return (token);
+}
+
+/*
+	@param form_name the name of the form {"shrubbery", "robotomy request", "presidential pardon"}
+*/
+AForm*	Intern::makeForm(const std::string form_name, const std::string target)
+{
+	AForm* new_form = NULL;
+
+	switch (getFormToken(form_name))
+	{
+		case ShrubberyCreation: new_form = new ShrubberyCreationForm(target); break;
+		case RobotomyRequest: new_form = new RobotomyRequestForm(target); break;
+		case PresidentialPardon: new_form = new PresidentialPardonForm(target); break;
+		default: throw DoesNotExistException();
+	}
+	return (new_form);
 }

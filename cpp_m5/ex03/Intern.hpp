@@ -23,18 +23,23 @@
 
 class Intern
 {
-	private:
-		std::string const	_name;
+	public:
+		enum Forms
+		{
+			ShrubberyCreation,
+			RobotomyRequest,
+			PresidentialPardon,
+			FormsCount
+		};
+
 	public:
 		Intern();
-		Intern(const std::string name, unsigned short grade);
 		~Intern();
 		Intern(const Intern& Intern);
-		Intern&		operator=(const Intern& Intern);
+		Intern&	operator=(const Intern& Intern);
+	/* Methods */
 	
-	/* Method */
 	AForm*				makeForm(const std::string form_name, const std::string target);
-	const std::string	getName(void) const;
 	
 	/* Exceptions */
 	class	DoesNotExistException: public std::exception
@@ -46,5 +51,3 @@ class Intern
 			}
 	};
 };
-
-std::ostream&	operator<<(std::ostream& out ,const Intern& Intern);

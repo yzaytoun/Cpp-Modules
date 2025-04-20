@@ -18,27 +18,32 @@ int main( void )
 {
 	Bureaucrat	b("Burea", 20);
 	Bureaucrat	pres("PRES", 1);
-
+	Intern someRandomIntern;
+	AForm* rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+	AForm* sf = someRandomIntern.makeForm("shrubbery", "Bender");
+	AForm* pf = someRandomIntern.makeForm("presidential pardon", "Bender");
+	
+	try
 	{
-		Intern someRandomIntern;
-		AForm* rrf;
-		rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+		std::cout << "-----------------------------" << std::endl;
+		AForm* df = someRandomIntern.makeForm("Does not exist", "Bender");
+		b.signForm(*df);
 	}
-
-	std::cout << "Executing form without signing " << std::endl;
-	b.executeForm(f1);
-	std::cout << "Signing then executing" << std::endl;
-	std::cout << "----------------------" << std::endl;
-	b.signForm(f1);
-	b.executeForm(f1);
-	std::cout << "----------------------" << std::endl;
-	b.signForm(f2);
-	b.executeForm(f2);
-	std::cout << "----------------------" << std::endl;
-	b.signForm(f3);	
-	b.executeForm(f3);
-	pres.signForm(f3);	
-	pres.executeForm(f3);
-	std::cout << "----------------------" << std::endl;
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	b.signForm(*rrf);
+	b.signForm(*sf);
+	b.signForm(*pf);
+	std::cout << "-----------------------------" << std::endl;
+	b.executeForm(*rrf);
+	b.executeForm(*sf);
+	b.executeForm(*pf);
+	std::cout << "-----------------------------" << std::endl;
+	
+	delete rrf;
+	delete sf;
+	delete pf;
 	return 0;
 }

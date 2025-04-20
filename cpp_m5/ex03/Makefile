@@ -12,9 +12,9 @@
 
 NAME = a.out
 
-INC = -IBureaucrat.hpp -IAForm.hpp -IShrubberyCreationForm.hpp -IPresidentialPardonForm.hpp -IRobotomyRequestForm.hpp
+INC = -IBureaucrat.hpp -IAForm.hpp -IShrubberyCreationForm.hpp -IPresidentialPardonForm.hpp -IRobotomyRequestForm.hpp -IIntern.hpp
 
-SRC = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp
+SRC = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp Intern.cpp
 
 CPPFLAGS := -Wall -Wextra -Werror -std=c++98 $(INC) -g
 
