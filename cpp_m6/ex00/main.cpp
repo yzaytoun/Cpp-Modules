@@ -10,28 +10,24 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Dog.hpp"
-#include "Cat.hpp"
-#include "WrongCat.hpp"
+#include "ScalarConverter.hpp"
 
-int main( void )
+int main(int ac, char **av)
 {
-	const Animal* meta = new Animal();
-	const Animal* j = new Dog();
-	const Animal* i = new Cat();
-	const WrongAnimal* w = new WrongCat();
+	t_scalar	sca;
 
-	std::cout << j->getType() << " " << std::endl;
-	std::cout << i->getType() << " " << std::endl;
-	std::cout << w->getType() << " " << std::endl;
-	i->makeSound(); //will output the cat sound!
-	j->makeSound();
-	w->makeSound(); //will output WrongAnimal sound!
-	meta->makeSound();
-
-	delete meta;
-	delete j;
-	delete i;
-	delete w;
-	return 0;
+	if (ac == 2)
+	{
+		sca = ScalarConverter::convert(av[1]);
+		std::cout << "char: " << sca.c << std::endl;
+		std::cout << "int: " << sca.i << std::endl;
+		std::cout << "float: " << sca.f << std::endl;
+		std::cout << "double: " << sca.d << std::endl;
+	}
+	else
+	{
+		std::cerr << "Only two arguments are allowed!" << std::endl;
+		return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
 }
