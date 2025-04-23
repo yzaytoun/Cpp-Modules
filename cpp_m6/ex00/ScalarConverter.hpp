@@ -17,16 +17,32 @@
 
 typedef	struct s_scalar
 {
-	std::string	c;
-	int			i;
-	float		f;
-	double		d;
+	char		_char;
+	int			_int;
+	float		_float;
+	double		_double;
 } t_scalar;
 
 class ScalarConverter
 {
 public:
+	enum Type
+	{
+		CHAR,
+		INTEGER,
+		FLOAT,
+		DOUBLE,
+		INF,
+		MAX_SCALAR
+	};
+private:
+	ScalarConverter();
+	ScalarConverter(const ScalarConverter& converter);
+	ScalarConverter&	operator=(const ScalarConverter& converter);
+	
+public:
 	virtual	~ScalarConverter() = 0;
-
 	static t_scalar	convert(const std::string value);
 };
+
+std::ostream&	operator>>(std::ostream& out, const t_scalar sca);

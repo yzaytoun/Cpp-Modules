@@ -12,60 +12,201 @@
 
 #include "ScalarConverter.hpp"
 
-std::string	toChar(const std::string value)
-{
-    char            c = -1;
-    std::string     output;
+ScalarConverter::ScalarConverter() {}
 
-    if (value.length() == 1)
-    {
-		c = value.at(0);
-        if (c >= 32 && c <= 127)
-			output = c;
-    }
-	else
-		output = "impossible!";
-    return (output);
+ScalarConverter::~ScalarConverter() {}
+
+ScalarConverter::ScalarConverter(const ScalarConverter& converter)
+{
+	(void)converter;
 }
 
-int    toInteger(const std::string value)
+ScalarConverter&	ScalarConverter::operator=(const ScalarConverter& converter)
 {
-    return (std::atoi(value.c_str()));
+	(void)converter;
+	return (*this);
 }
 
-float    toFloat(const std::string value)
+/*-------- Converters ---------*/
+
+char	toChar(const std::string value, bool is_explicit = true)
 {
-    return (std::atof(value.c_str()));
+	char	c;
+
+	
+	return (c);
 }
 
-double    toDouble(const std::string value)
+int	toInteger(const std::string value, bool is_explicit = true)
 {
-    return (std::stod(value.c_str()));
+	int	num;
+
+	
+	return (num);
 }
 
-std::string	getDataType(const std::string value)
+float	toFloat(const std::string value, bool is_explicit = true)
 {
-	std::string datatype;
+	float	num;
 
-	if (value.length() == 1 && isAlpha(value.at(0)))
-		datatype = "char";
-	else if (containsSubStr(value, "f"))
-		datatype = "float";
-	else if (containsSubStr(value, "."))
-		datatype = "double";
-	else if (isDigit(value))
-		datatype = "integer";
+
+	return (num);
+}
+
+double	toDouble(const std::string value, bool is_explicit = true)
+{
+	double	num;
+
+	return (num);
+}
+
+t_scalar	toInfinity(const std::string value, bool is_explicit = true)
+{
+	t_scalar	sca;
+
+	sca._char = static_cast<char>(value.at(0));
+	sca._int = static_cast<int>(value.at(0));
+	sca._double = static_cast<double>(value.at(0));
+	sca._float = static_cast<float>(value.at(0));
+	return (sca);
+}
+
+/*-------- Checkers ---------*/
+
+bool	isChar(const std::string val)
+{
+	bool	is_char = false;
+
+	return (is_char);
+}
+
+bool	isInteger(const std::string val)
+{
+	bool	is_int = false;
+	
+	return (is_int);
+}
+
+bool	isDouble(const std::string val)
+{
+	bool	is_double = false;
+	
+	return (is_double);
+	
+}
+
+bool	isFloat(const std::string val)
+{
+	bool	is_float = false;
+	
+	return (is_float);
+	
+}
+
+bool	isInfinity(const std::string val)
+{
+	bool	is_inf = false;
+	
+	return (is_inf);
+
+}
+
+/*-------- AUX ---------*/
+
+bool    containsSubStr(const std::string str_to_search, const std::string value_to_find)
+{
+	std::size_t pos = str_to_search.find(value_to_find);
+
+	if (pos != std::string::npos)
+		return (true);
+	return (false);
+}
+
+bool    endsWith(const std::string str_to_search, const std::string suffix)
+{
+	bool	ends_with = false;
+
+	if (!str_to_search.empty() && str_to_search.length() >= suffix.length())
+	{
+		if (str_to_search.compare(str_to_search.length() - suffix.length(), suffix.length(), suffix) == 0)
+			ends_with = true;
+	}
+	return (ends_with);
+}
+
+bool    startsWith(const std::string str_to_search, const std::string prefix)
+{
+	bool	starts_with = false;
+
+	if (!str_to_search.empty() && str_to_search.length() >= prefix.length())
+	{
+		if (str_to_search.compare(0, prefix.length(), prefix) == 0)
+			starts_with = true;
+	}
+	return (starts_with);
+}
+
+ScalarConverter::Type   getDataType(const std::string value)
+{
+	ScalarConverter::Type	datatype;
+
+	if (isChar(value))
+		datatype = ScalarConverter::CHAR;
+	else if (isDouble(value))
+		datatype = ScalarConverter::DOUBLE;
+	else if (isFloat(value))
+		datatype = ScalarConverter::FLOAT;
+	else if (isInteger(value))
+		datatype = ScalarConverter::INTEGER;
+	else if (isInfinity(value))
+		datatype = ScalarConverter::INF;
 	return (datatype);
 }
 
-t_scalar    ScalarConverter::convert(const std::string value)
+t_scalar	ScalarConverter::convert(const std::string value)
 {
-    t_scalar    sca;
+	t_scalar	sca;
 
-	std::cout << getDataType(value) << std::endl;
-    sca.c = toChar(value);
-    sca.i = toInteger(value);
-    sca.f = toDouble(value);
-    sca.d = toFloat(value);
-    return (sca);
+	switch (getDataType(value))
+	{
+	case ScalarConverter::CHAR:
+	{
+		sca._char = toChar(value, false);
+		sca._int = toInteger(value, true);
+		sca._double = toDouble(value, true);
+		sca._float = toFloat(value, true);
+		break;
+	}
+	case ScalarConverter::INTEGER:
+	{
+		sca._char = toChar(value, true);
+		sca._int = toInteger(value, false);
+		sca._double = toDouble(value, true);
+		sca._float = toFloat(value, true);
+		break;
+	}
+	case ScalarConverter::DOUBLE:
+	{
+		sca._char = toChar(value, true);
+		sca._int = toInteger(value, true);
+		sca._double = toDouble(value, false);
+		sca._float = toFloat(value, true);
+		break;
+	}
+	case ScalarConverter::FLOAT:
+	{
+		sca._char = toChar(value, true);
+		sca._int = toInteger(value, true);
+		sca._double = toDouble(value, true);
+		sca._float = toFloat(value, false);
+		break;
+	}
+	case ScalarConverter::INF:
+		sca = toInfinity(value);
+		break;
+	default:
+		std::cerr << "Cannot handle this value type!!" << std::endl;
+		break;
+	}
+	return (sca);
 }

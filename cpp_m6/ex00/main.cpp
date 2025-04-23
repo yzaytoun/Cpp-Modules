@@ -19,10 +19,7 @@ int main(int ac, char **av)
 	if (ac == 2)
 	{
 		sca = ScalarConverter::convert(av[1]);
-		std::cout << "char: " << sca.c << std::endl;
-		std::cout << "int: " << sca.i << std::endl;
-		std::cout << "float: " << sca.f << std::endl;
-		std::cout << "double: " << sca.d << std::endl;
+		std::cout << sca << std::endl;
 	}
 	else
 	{
