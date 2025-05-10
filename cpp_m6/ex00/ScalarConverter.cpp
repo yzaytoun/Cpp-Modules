@@ -71,46 +71,6 @@ t_scalar	toInfinity(const std::string value, bool is_explicit = true)
 	return (sca);
 }
 
-/*-------- Checkers ---------*/
-
-bool	isChar(const std::string val)
-{
-	bool	is_char = false;
-
-	return (is_char);
-}
-
-bool	isInteger(const std::string val)
-{
-	bool	is_int = false;
-	
-	return (is_int);
-}
-
-bool	isDouble(const std::string val)
-{
-	bool	is_double = false;
-	
-	return (is_double);
-	
-}
-
-bool	isFloat(const std::string val)
-{
-	bool	is_float = false;
-	
-	return (is_float);
-	
-}
-
-bool	isInfinity(const std::string val)
-{
-	bool	is_inf = false;
-	
-	return (is_inf);
-
-}
-
 /*-------- AUX ---------*/
 
 bool    containsSubStr(const std::string str_to_search, const std::string value_to_find)
@@ -146,22 +106,74 @@ bool    startsWith(const std::string str_to_search, const std::string prefix)
 	return (starts_with);
 }
 
+bool	isInfinity(const std::string val)
+{
+	bool				is_inf = false;
+	const std::string	constants[5] = {"-inff", "+inff", "-inf", "+inf", "nan"};
+	int					i = 0;
+
+	while (i < 5)
+	{
+		if (val.compare(constants[i]) == 0)
+		{
+			is_inf = true;
+			break;
+		}
+		++i;
+	}
+	return (is_inf);
+}
+
+int	charCount(const std::string str, int chr)
+{
+	int		count = 0;
+	size_t	i = 0;
+
+	while (i < str.size())
+	{
+		if (str.at(i) == chr)
+			++count;
+		++i;
+	}
+	return (count);
+}
+
+bool	isNumber(const std::string val)
+{
+	bool	is_number = false;
+	std::size_t	i = 0;
+
+	if (!val.empty() && charCount(val, 'f') <= 1 && charCount(val, '.') <= 1)
+	{
+		is_number = true;
+		while (i < val.size())
+		{
+			if (!std::isdigit(val.at(i)) && (val.at(i) != '.' || val.at(i) != 'f'))
+				is_number = false;
+			++i;
+		}
+	}
+	return (is_number);
+}
+
 ScalarConverter::Type   getDataType(const std::string value)
 {
 	ScalarConverter::Type	datatype;
 
-	if (isChar(value))
+	if (value.length() == 1 && std::isprint(value.at(0)))
 		datatype = ScalarConverter::CHAR;
-	else if (isDouble(value))
-		datatype = ScalarConverter::DOUBLE;
-	else if (isFloat(value))
+	else if (isNumber(value) && containsSubStr(value, ".") && endsWith(value, "f"))
 		datatype = ScalarConverter::FLOAT;
-	else if (isInteger(value))
+	else if (isNumber(value) && containsSubStr(value, "."))
+		datatype = ScalarConverter::DOUBLE;
+	else if (isNumber(value) && !containsSubStr(value, "."))
 		datatype = ScalarConverter::INTEGER;
 	else if (isInfinity(value))
 		datatype = ScalarConverter::INF;
 	return (datatype);
 }
+
+/* --------- convert --------- */
 
 t_scalar	ScalarConverter::convert(const std::string value)
 {
@@ -172,32 +184,32 @@ t_scalar	ScalarConverter::convert(const std::string value)
 	case ScalarConverter::CHAR:
 	{
 		sca._char = toChar(value, false);
-		sca._int = toInteger(value, true);
-		sca._double = toDouble(value, true);
-		sca._float = toFloat(value, true);
+		sca._int = toInteger(value);
+		sca._double = toDouble(value);
+		sca._float = toFloat(value);
 		break;
 	}
 	case ScalarConverter::INTEGER:
 	{
-		sca._char = toChar(value, true);
+		sca._char = toChar(value);
 		sca._int = toInteger(value, false);
-		sca._double = toDouble(value, true);
-		sca._float = toFloat(value, true);
+		sca._double = toDouble(value);
+		sca._float = toFloat(value);
 		break;
 	}
 	case ScalarConverter::DOUBLE:
 	{
-		sca._char = toChar(value, true);
-		sca._int = toInteger(value, true);
+		sca._char = toChar(value);
+		sca._int = toInteger(value);
 		sca._double = toDouble(value, false);
-		sca._float = toFloat(value, true);
+		sca._float = toFloat(value);
 		break;
 	}
 	case ScalarConverter::FLOAT:
 	{
-		sca._char = toChar(value, true);
-		sca._int = toInteger(value, true);
-		sca._double = toDouble(value, true);
+		sca._char = toChar(value);
+		sca._int = toInteger(value);
+		sca._double = toDouble(value);
 		sca._float = toFloat(value, false);
 		break;
 	}
