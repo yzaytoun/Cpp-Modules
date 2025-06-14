@@ -33,7 +33,7 @@ public:
 		FLOAT,
 		DOUBLE,
 		INF,
-		MAX_SCALAR
+		SCALAR_NULL
 	};
 private:
 	ScalarConverter();

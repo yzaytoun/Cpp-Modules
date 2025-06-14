@@ -29,45 +29,64 @@ ScalarConverter&	ScalarConverter::operator=(const ScalarConverter& converter)
 
 /*-------- Converters ---------*/
 
-char	toChar(const std::string value, bool is_explicit = true)
+std::string	toChar(const std::string value, bool is_explicit = true)
 {
-	char	c;
+	char		c = value.at(0);
+	std::string	result;
 
-	
-	return (c);
+	if (c > std::numeric_limits<char>::max() || c < std::numeric_limits<char>::min())
+		result = "impossible";
+	else
+		result = value;
+	return (result);
 }
 
-int	toInteger(const std::string value, bool is_explicit = true)
+std::string	toInteger(const std::string value, bool is_explicit = true)
 {
-	int	num;
+	int	num = std::stoi(value);
+	std::string	result;
 
-	
-	return (num);
+	if (num > std::numeric_limits<int>::max() || num < std::numeric_limits<int>::min())
+		result = "impossible";
+	else
+		result = value;
+	return (result);
 }
 
-float	toFloat(const std::string value, bool is_explicit = true)
+std::string	toFloat(const std::string value, bool is_explicit = true)
 {
-	float	num;
+	float	num = std::stof(value);
+	std::string	result;
 
-
-	return (num);
+	if (num > std::numeric_limits<float>::max() || num < std::numeric_limits<float>::min())
+		result = "impossible";
+	else
+		result = value;
+	if (!endsWith(result, "f"))
+		result.append("f");
+	return (result);
 }
 
-double	toDouble(const std::string value, bool is_explicit = true)
+std::string	toDouble(const std::string value, bool is_explicit = true)
 {
-	double	num;
+	double	num = std::stod(value);
+	std::string	result;
 
-	return (num);
+	if (num > std::numeric_limits<double>::max() || num < std::numeric_limits<double>::min())
+		result = "impossible";
+	else
+		result = value;
+	return (result);
 }
 
-t_scalar	toInfinity(const std::string value, bool is_explicit = true)
+t_scalar	toInfinity(std::string value, bool is_explicit = true)
 {
 	t_scalar	sca;
 
 	sca._char = static_cast<char>(value.at(0));
-	sca._int = static_cast<int>(value.at(0));
-	sca._double = static_cast<double>(value.at(0));
-	sca._float = static_cast<float>(value.at(0));
+	sca._int = static_cast<int>(value);
+	sca._double = static_cast<double>(value);
+	sca._float = static_cast<float>(value);
 	return (sca);
 }
 
@@ -138,35 +157,86 @@ int	charCount(const std::string str, int chr)
 	return (count);
 }
 
-bool	isNumber(const std::string val)
+bool	isInteger(const std::string val)
 {
 	bool	is_number = false;
 	std::size_t	i = 0;
 
-	if (!val.empty() && charCount(val, 'f') <= 1 && charCount(val, '.') <= 1)
+	if (!val.empty())
 	{
-		is_number = true;
 		while (i < val.size())
 		{
-			if (!std::isdigit(val.at(i)) && (val.at(i) != '.' || val.at(i) != 'f'))
-				is_number = false;
+			is_number = std::isdigit(val.at(i));
+			if (!is_number)
+				break;
 			++i;
 		}
 	}
 	return (is_number);
 }
 
+bool	isDouble(const std::string val)
+{
+	bool		is_number = false;
+	int			point_count = 0;
+	std::size_t	i = 0;
+
+	if (!val.empty())
+	{
+		while (i < val.size())
+		{
+			is_number = std::isdigit(val.at(i));
+			if (!is_number && val.at(i) == '.' && !point_count)
+			{
+				++point_count;
+				continue;
+			}
+			else if (!is_number)
+				break;
+			++i;
+		}
+	}
+	return (is_number);
+}
+
+bool	isFloat(const std::string val)
+{
+	bool		is_number = false;
+	int			point_count = 0;
+	std::size_t	i = 0;
+
+	
+	if (!val.empty())
+	{
+		while (i < val.size() - 1)
+		{
+			is_number = std::isdigit(val.at(i));
+			if (!is_number && val.at(i) == '.' && !point_count)
+			{
+				++point_count;
+				continue;
+			}
+			else if (!is_number)
+				break;
+			++i;
+		}
+		if (is_number && val.at(i) != 'f')
+			is_number = false;
+	}
+	return (is_number);
+}
+
 ScalarConverter::Type   getDataType(const std::string value)
 {
-	ScalarConverter::Type	datatype;
+	ScalarConverter::Type	datatype = ScalarConverter::SCALAR_NULL;
 
 	if (value.length() == 1 && std::isprint(value.at(0)))
 		datatype = ScalarConverter::CHAR;
-	else if (isNumber(value) && containsSubStr(value, ".") && endsWith(value, "f"))
+	else if (isFloat(value))
 		datatype = ScalarConverter::FLOAT;
-	else if (isNumber(value) && containsSubStr(value, "."))
+	else if (isDouble(value))
 		datatype = ScalarConverter::DOUBLE;
-	else if (isNumber(value) && !containsSubStr(value, "."))
+	else if (isInteger(value))
 		datatype = ScalarConverter::INTEGER;
 	else if (isInfinity(value))
 		datatype = ScalarConverter::INF;
