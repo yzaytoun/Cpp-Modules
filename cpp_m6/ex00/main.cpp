@@ -11,20 +11,30 @@
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
+#include <unistd.h>
 
 int main(int ac, char **av)
 {
-	t_scalar	sca;
+	(void)ac;
+	(void)av;
+	//if (ac == 2)
+	//{
+	//	std::cout << ScalarConverter::convert(av[1]) << std::endl;
+	//}
+	//else
+	//{
+	//	std::cerr << "Only two arguments are allowed!" << std::endl;
+	//	return (EXIT_FAILURE);
+	//}
+	char	buffer[BUFSIZ];
+	size_t	len;
 
-	if (ac == 2)
+	while (true)
 	{
-		sca = ScalarConverter::convert(av[1]);
-		std::cout << sca << std::endl;
+		len = read(0, buffer, BUFSIZ);
+		if (len > 0)
+			std::cout << ScalarConverter::convert(buffer) << std::endl;
 	}
-	else
-	{
-		std::cerr << "Only two arguments are allowed!" << std::endl;
-		return (EXIT_FAILURE);
-	}
+	
 	return (EXIT_SUCCESS);
 }
