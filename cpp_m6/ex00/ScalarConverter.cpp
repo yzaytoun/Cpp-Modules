@@ -205,18 +205,29 @@ bool	isFloat(const std::string val)
 	return (is_number);
 }
 
+bool	isChar(const std::string value)
+{
+	return (value.length() == 1 && std::isprint(value.at(0)));
+}
+
 ScalarConverter::Type   getDataType(const std::string value)
 {
 	ScalarConverter::Type	datatype = ScalarConverter::SCALAR_MAX;
+	bool	(*typefunc[4])(std::string) = {
+		isChar,
+		isFloat,
+		isDouble,
+		isInteger
+	};
 
-	if (value.length() == 1 && std::isprint(value.at(0)))
-		datatype = ScalarConverter::CHAR;
-	else if (isFloat(value))
-		datatype = ScalarConverter::FLOAT;
-	else if (isDouble(value))
-		datatype = ScalarConverter::DOUBLE;
-	else if (isInteger(value))
-		datatype = ScalarConverter::INTEGER;
+	for (int i = 0; i < ScalarConverter::SCALAR_MAX; i++)
+	{
+		if (typefunc[i](value))
+		{
+			datatype = static_cast<ScalarConverter::Type>(i);
+			break;
+		}
+	}
 	return (datatype);
 }
 
