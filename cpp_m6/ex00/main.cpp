@@ -13,26 +13,16 @@
 #include "ScalarConverter.hpp"
 #include <unistd.h>
 
-int main(int ac, char **av)
+int main(void)
 {
-	(void)ac;
-	(void)av;
-	//if (ac == 2)
-	//{
-	//	std::cout << ScalarConverter::convert(av[1]) << std::endl;
-	//}
-	//else
-	//{
-	//	std::cerr << "Only two arguments are allowed!" << std::endl;
-	//	return (EXIT_FAILURE);
-	//}
 	char	buffer[BUFSIZ];
-	size_t	len;
+	size_t	len = 1;
 
-	while (true)
+	while (len > 0)
 	{
 		len = read(0, buffer, BUFSIZ);
 		if (len > 0)
+			std::cout << "-----------" << std::endl;
 			std::cout << ScalarConverter::convert(buffer) << std::endl;
 	}
 	
