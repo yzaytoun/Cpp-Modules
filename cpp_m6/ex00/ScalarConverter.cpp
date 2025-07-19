@@ -87,22 +87,25 @@ std::string	toInteger(const std::string value, ScalarConverter::Type type)
 	long				num = -1;
 	std::stringstream	result;
 
-	try
+	if (type == ScalarConverter::CHAR)
+		result << static_cast<int>(value.at(0));
+	else
 	{
-		num = std::stol(value);
-	}
-	catch(const std::exception& e)
-	{
-		result << "impossible";
-	}
-	if (result.str().empty())
-	{
-		if (num > std::numeric_limits<int>::max() || num < std::numeric_limits<int>::min())
+		try
+		{
+			num = std::stoi(value);
+		}
+		catch(const std::exception& e)
+		{
 			result << "impossible";
-		else if (type == ScalarConverter::CHAR)
-			result << static_cast<int>(value.at(0));
-		else
-			result << num;
+		}
+		if (result.str().empty())
+		{
+			if (num > std::numeric_limits<int>::max() || num < std::numeric_limits<int>::min())
+				result << "impossible";
+			else
+				result << num;
+		}
 	}
 	return (result.str());
 }
@@ -112,59 +115,67 @@ std::string	toFloat(const std::string value, ScalarConverter::Type type)
 	float				num = -1;
 	std::stringstream	result;
 
-	try
+	if (type == ScalarConverter::CHAR)
+		result << static_cast<float>(value.at(0));
+	else if (isInfinity(value))
+		result << value;
+	else
 	{
-		num = std::stof(value);
-	}
-	catch(const std::exception& e)
-	{
-		result << "impossible";
-	}
-	if (result.str().empty())
-	{
-		if (num > std::numeric_limits<float>::max() || num < std::numeric_limits<float>::min())
+		try
+		{
+			num = std::strtof(value.c_str(), NULL);
+		}
+		catch(const std::exception& e)
+		{
 			result << "impossible";
-		else if (type == ScalarConverter::CHAR)
-			result << static_cast<float>(value.at(0));
-		else if (isInfinity(value))
-			result << value;
-		else
-			result << num;
-		if (result.str().compare("impossible") != 0 && !endsWith(result.str(), "f"))
-				result << "f";
+		}
+		if (result.str().empty())
+		{
+			if (num > std::numeric_limits<float>::max() || num < -std::numeric_limits<float>::max())
+				result << "impossible";
+			else
+				result << num;
+		}
 	}
+	if (!containsSubStr(result.str(), "."))
+		result << ".0";
+	if (result.str().compare("impossible") != 0 && !endsWith(result.str(), "f"))
+		result << "f";
 	return (result.str());
 }
 
 std::string	toDouble(const std::string value, ScalarConverter::Type type)
 {
-	double				num = std::stod(value);
+	double				num = -1;
 	std::stringstream	result;
 
-	try
+	if (type == ScalarConverter::CHAR)
+		result << static_cast<double>(value.at(0));
+	else if (isInfinity(value))
 	{
-		num = std::stof(value);
+		if (endsWith(value,"ff"))
+			result << value.substr(0, value.length() - 1);
 	}
-	catch(const std::exception& e)
+	else
 	{
-		result << "impossible";
-	}
-	if (result.str().empty())
-	{
-		if (num > std::numeric_limits<double>::max() || num < std::numeric_limits<double>::min())
-			result << "impossible";
-		else if (type == ScalarConverter::CHAR)
-			result << static_cast<double>(value.at(0));
-		else
-			result << num;
-		if (result.str().compare("impossible") != 0)
+		try
 		{
-			if (!containsSubStr(result.str(), "."))
-				result << ".0";
-			if (!endsWith(result.str(), "f"))
-				result << "f";
+			num = std::strtod(value.c_str(), NULL);
+		}
+		catch(const std::exception& e)
+		{
+			result << "impossible";
+		}
+		if (result.str().empty())
+		{
+			if (num > std::numeric_limits<double>::max() || num < -std::numeric_limits<double>::max())
+				result << "impossible";
+			else
+				result << num;
 		}
 	}
+	if (result.str() != "impossible" && !containsSubStr(result.str(), "."))
+		result << ".0";
 	return (result.str());
 }
 
@@ -246,17 +257,18 @@ bool	isFloat(const std::string val)
 
 bool	isChar(const std::string value)
 {
-	return (value.length() == 1 && std::isprint(value.at(0)));
+	return (value.length() == 1 && std::isprint(value.at(0)) && !std::isdigit(value.at(0)));
 }
 
 ScalarConverter::Type   getDataType(const std::string value)
 {
 	ScalarConverter::Type	datatype = ScalarConverter::SCALAR_MAX;
-	bool	(*typefunc[4])(std::string) = {
+	bool	(*typefunc[5])(std::string) = {
 		isChar,
 		isInteger,
 		isFloat,
-		isDouble
+		isDouble,
+		isInfinity
 	};
 
 	for (int i = 0; i < ScalarConverter::SCALAR_MAX; i++)
@@ -288,8 +300,7 @@ std::string	ScalarConverter::convert(const std::string value)
 	ScalarConverter::Type	type = getDataType(cleaned_value);
 	std::stringstream		ss;
 
-	if (type == ScalarConverter::CHAR || type == ScalarConverter::INTEGER
-		|| type == ScalarConverter::DOUBLE || type == ScalarConverter::FLOAT)
+	if (type != ScalarConverter::SCALAR_MAX)
 	{
 		ss 	<< toChar(cleaned_value)
 			<< "\n"

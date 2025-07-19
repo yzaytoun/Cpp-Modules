@@ -25,6 +25,7 @@ public:
 		INTEGER,
 		FLOAT,
 		DOUBLE,
+		INF,
 		SCALAR_MAX
 	};
 	static std::string	convert(const std::string value);
