@@ -47,15 +47,23 @@ bool    startsWith(const std::string str_to_search, const std::string prefix)
 	return (starts_with);
 }
 
+bool	isSign(int ch)
+{
+	return (ch == '-' || ch == '+');
+}
+
 bool	isInfinity(const std::string val)
 {
 	bool				is_inf = false;
-	const std::string	constants[5] = {"-inff", "+inff", "-inf", "+inf", "nan"};
+	std::string			val_to_compare = val;
+	const std::string	constants[6] = {"inff", "inf", "nan", "nanf"};
 	int					i = 0;
 
-	while (i < 5)
+	if (isSign(val[0]))
+		val_to_compare.erase(0,1);
+	while (i < 6)
 	{
-		if (val.compare(constants[i]) == 0)
+		if (val_to_compare == constants[i])
 		{
 			is_inf = true;
 			break;
@@ -117,8 +125,13 @@ std::string	toFloat(const std::string value, ScalarConverter::Type type)
 
 	if (type == ScalarConverter::CHAR)
 		result << static_cast<float>(value.at(0));
-	else if (isInfinity(value))
-		result << value;
+	else if (type == ScalarConverter::INF)
+	{
+		if (!endsWith(value, "ff") && !startsWith(value, "nan"))
+			result << value << "f";
+		else
+			result << value;
+	}
 	else
 	{
 		try
@@ -137,7 +150,7 @@ std::string	toFloat(const std::string value, ScalarConverter::Type type)
 				result << num;
 		}
 	}
-	if (!containsSubStr(result.str(), "."))
+	if (type != ScalarConverter::INF && !containsSubStr(result.str(), "."))
 		result << ".0";
 	if (result.str().compare("impossible") != 0 && !endsWith(result.str(), "f"))
 		result << "f";
@@ -151,10 +164,12 @@ std::string	toDouble(const std::string value, ScalarConverter::Type type)
 
 	if (type == ScalarConverter::CHAR)
 		result << static_cast<double>(value.at(0));
-	else if (isInfinity(value))
+	else if (type == ScalarConverter::INF)
 	{
-		if (endsWith(value,"ff"))
+		if (endsWith(value,"f") && !endsWith(value, "inf"))
 			result << value.substr(0, value.length() - 1);
+		else
+			result << value;
 	}
 	else
 	{
@@ -174,7 +189,7 @@ std::string	toDouble(const std::string value, ScalarConverter::Type type)
 				result << num;
 		}
 	}
-	if (result.str() != "impossible" && !containsSubStr(result.str(), "."))
+	if (type != ScalarConverter::INF && result.str() != "impossible" && !containsSubStr(result.str(), "."))
 		result << ".0";
 	return (result.str());
 }
@@ -182,6 +197,7 @@ std::string	toDouble(const std::string value, ScalarConverter::Type type)
 bool	isInteger(const std::string val)
 {
 	bool	is_number = false;
+	short	sign_count = 0;
 	std::size_t	i = 0;
 
 	if (!val.empty())
@@ -189,7 +205,13 @@ bool	isInteger(const std::string val)
 		while (i < val.size())
 		{
 			is_number = std::isdigit(val.at(i));
-			if (!is_number)
+			if (!is_number && isSign(val.at(i)) && !sign_count)
+			{
+				++sign_count;
+				++i;
+				continue;
+			}
+			else if (!is_number)
 				break;
 			++i;
 		}
@@ -200,6 +222,7 @@ bool	isInteger(const std::string val)
 bool	isDouble(const std::string val)
 {
 	bool		is_number = false;
+	short		sign_count = 0;
 	int			point_count = 0;
 	std::size_t	i = 0;
 
@@ -210,9 +233,11 @@ bool	isDouble(const std::string val)
 			is_number = std::isdigit(val.at(i));
 			if (!is_number && val.at(i) == '.')
 				++point_count;
+			else if (!is_number && isSign(val.at(i)))
+				++sign_count;
 			else if (!is_number)
 				break;
-			if (point_count > 1)
+			if (point_count > 1 || sign_count > 1)
 			{
 				is_number = false;
 				break;
@@ -228,6 +253,7 @@ bool	isFloat(const std::string val)
 	bool		is_number = false;
 	int			point_count = 0;
 	int			f_count = 0;
+	short		sign_count = 0;
 	std::size_t	i = 0;
 
 	
@@ -238,11 +264,13 @@ bool	isFloat(const std::string val)
 			is_number = std::isdigit(val.at(i));
 			if (!is_number && val.at(i) == '.')
 				++point_count;
+			else if (!is_number && isSign(val.at(i)))
+				++sign_count;
 			else if (!is_number && val.at(i) == 'f')
 				++f_count;
 			else if (!is_number)
 				break;
-			if (point_count > 1 || f_count > 0)
+			if (point_count > 1 || f_count > 0 || sign_count > 0)
 			{
 				is_number = false;
 				break;
