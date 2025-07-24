@@ -12,6 +12,20 @@
 
 #include "Serializer.hpp"
 
+Serializer::Serializer() {}
+Serializer::~Serializer() {}
+
+Serializer::Serializer(Serializer& serial)
+{
+	*this = serial;
+}
+
+Serializer&	Serializer::operator=(Serializer& serial)
+{
+	(void)serial;
+	return (*this);	
+}
+
 uintptr_t	Serializer::serialize(Data* ptr)
 {
 	return (reinterpret_cast<uintptr_t>(ptr));

@@ -19,6 +19,11 @@
 
 class Serializer
 {
+private:
+	Serializer();
+	~Serializer();
+	Serializer(Serializer& serial);
+	Serializer&	operator=(Serializer& serial);
 public:
 	static uintptr_t	serialize(Data* ptr);
 	static Data*		deserialize(uintptr_t raw);

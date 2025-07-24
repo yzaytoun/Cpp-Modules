@@ -12,6 +12,21 @@
 
 #include "ScalarConverter.hpp"
 
+/* Private constructors */
+ScalarConverter::ScalarConverter() {}
+ScalarConverter::~ScalarConverter() {}
+
+ScalarConverter::ScalarConverter(ScalarConverter& scala)
+{
+	*this = scala;
+}
+
+ScalarConverter&	ScalarConverter::operator=(ScalarConverter& scala)
+{
+	(void)scala;
+	return (*this);	
+}
+
 /*-------- AUX ---------*/
 
 bool    containsSubStr(const std::string str_to_search, const std::string value_to_find)
