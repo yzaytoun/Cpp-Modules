@@ -12,9 +12,9 @@
 
 NAME = a.out
 
-INC = -Iwhatever.hpp
+INC = -IArray.hpp
 
-SRC = main.cpp
+SRC = Array.tpp main.cpp
 
 CPPFLAGS := -Wall -Wextra -Werror -std=c++98 $(INC) -g
 

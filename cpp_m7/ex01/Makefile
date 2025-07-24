@@ -12,7 +12,7 @@
 
 NAME = a.out
 
-INC = -Iwhatever.hpp
+INC = -Iiter.hpp
 
 SRC = main.cpp
 

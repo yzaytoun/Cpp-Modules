@@ -10,21 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "whatever.hpp"
+#include "iter.hpp"
 
 int main( void )
 {
-	int a = 2;
-	int b = 3;
-	::swap( a, b );
-	std::cout << "a = " << a << ", b = " << b << std::endl;
-	std::cout << "min( a, b ) = " << ::min( a, b ) << std::endl;
-	std::cout << "max( a, b ) = " << ::max( a, b ) << std::endl;
-	std::string c = "chaine1";
-	std::string d = "chaine2";
-	::swap(c, d);
-	std::cout << "c = " << c << ", d = " << d << std::endl;
-	std::cout << "min( c, d ) = " << ::min( c, d ) << std::endl;
-	std::cout << "max( c, d ) = " << ::max( c, d ) << std::endl;
+	std::string	s_arr[3] = {"hola", "mola", "cola"};
+	int			i_arr[3] = {1,2,3};
+	double		d_arr[4] = {1.0,2.2,3.3,4.4};
+
+	std::cout << "s_arr -> ";
+	iter(s_arr, 3, print);
+	std::cout << std::endl;
+	std::cout << "i_arr -> ";
+	iter(i_arr, 3, print);
+	std::cout << std::endl;
+	std::cout << "d_arr -> ";
+	iter(d_arr, 3, print);
+	std::cout << std::endl;
 	return 0;
 }

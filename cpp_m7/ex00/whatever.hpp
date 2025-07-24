@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   whatever.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -15,15 +15,28 @@
 #include <iostream>
 #include <string>
 
-class Animal
+template<typename T>
+void	swap(T& x, T& y)
 {
-	protected:
-		std::string	_type;
-	public:
-		Animal();
-		virtual ~Animal();
-		Animal(const Animal& animal);
-	
-	virtual std::string		getType(void) const;
-	virtual void			makeSound(void) const;
-};
+	T	temp = y;
+	y = x;
+	x = temp;
+}
+
+template<typename T>
+T	max(const T& x, const T& y)
+{
+	if (x > y)
+		return (x);
+	else
+		return (y);
+}
+
+template<typename T>
+T	min(const T& x, const T& y)
+{
+	if (x < y)
+		return (x);
+	else
+		return (y);
+}
