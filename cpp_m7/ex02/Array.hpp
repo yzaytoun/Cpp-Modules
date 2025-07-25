@@ -14,14 +14,7 @@
 
 #include <iostream>
 #include <string>
-
-# define DEF_SIZE	1
-
-template<typename T>
-void	print(const T& x)
-{
-	std::cout << x << " ";
-}
+#include <exception>
 
 template<class T>
 class Array
@@ -34,10 +27,13 @@ public:
 	Array(unsigned int size);
 	~Array();
 	Array(const Array& arr);
-	Array&	operator=(const Array& arr);
-	T		operator[](const int& idx){
-		
-	}
 
+	Array<T>&		operator=(const Array& arr);
+	T&				operator[](unsigned int idx);
+	T				operator[](unsigned int idx) const;
+
+	void*			operator new[](size_t sz);
+	void			operator delete[](void* ptr);
 	unsigned int	size() const;
+	void			iter(void (*func)(const T&));
 };
