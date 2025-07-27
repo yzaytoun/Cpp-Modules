@@ -12,9 +12,9 @@
 
 NAME = a.out
 
-INC = -IAnimal.hpp -IDog.hpp -ICat.hpp -IWrongCat.cpp -IWrongAnimal.cpp
+INC = -Ieasyfind.hpp -Ieasyfind.tpp
 
-SRC = main.cpp Animal.cpp Dog.cpp Cat.cpp WrongCat.cpp WrongAnimal.cpp
+SRC = main.cpp
 
 CPPFLAGS := -Wall -Wextra -Werror -std=c++98 $(INC) -g
 

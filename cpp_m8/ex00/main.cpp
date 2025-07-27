@@ -10,28 +10,34 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Dog.hpp"
-#include "Cat.hpp"
-#include "WrongCat.hpp"
+#include "easyfind.hpp"
+#include "easyfind.tpp"
+
+std::string	bool_string(const bool val)
+{
+	if (val)
+		return ("True");
+	return ("False");
+}
 
 int main( void )
 {
-	const Animal* meta = new Animal();
-	const Animal* j = new Dog();
-	const Animal* i = new Cat();
-	const WrongAnimal* w = new WrongCat();
+	std::map<std::string, int> mp;
 
-	std::cout << j->getType() << " " << std::endl;
-	std::cout << i->getType() << " " << std::endl;
-	std::cout << w->getType() << " " << std::endl;
-	i->makeSound(); //will output the cat sound!
-	j->makeSound();
-	w->makeSound(); //will output WrongAnimal sound!
-	meta->makeSound();
+	mp["Hola"] = 2;
+	mp["mola"] = 21;
 
-	delete meta;
-	delete j;
-	delete i;
-	delete w;
+	std::cout << typeid(mp).name() << std::endl;
+	//std::cout << "---- Map ---- " << std::endl;
+	//std::cout << "Search for 21 -> " << bool_string(easyfind(mp, 21)) << std::endl;
+	//std::cout << "Search for 444 -> " << bool_string(easyfind(mp, 444)) << std::endl;
+	//
+	std::vector<int>	vec;
+	vec.push_back(1);
+	vec.push_back(2);
+	
+	std::cout << "---- Vector ---- " << std::endl;
+	std::cout << "Search for 1 -> " << bool_string(easyfind(vec, 21)) << std::endl;
+	std::cout << "Search for 2 -> " << bool_string(easyfind(vec, 444)) << std::endl;
 	return 0;
 }
