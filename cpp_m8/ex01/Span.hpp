@@ -19,13 +19,17 @@
 class Span
 {
 private:
-	const std::size_t	_size;
+	std::size_t			_size;
 	std::vector<int>	_numbers;
 public:
 	Span(unsigned int N);
 	~Span();
+	Span(const Span& s);
+	Span&	operator=(const Span& s);
 
 	/* Methods */
+	size_t				getSize(void) const;
+	std::vector<int>	getSpanValues(void ) const;
 	void    addNumber(const int& num);
 	void    addMany(const std::vector<int>& many);
 	int     shortestSpan(void) const;

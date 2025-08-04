@@ -27,17 +27,16 @@ int main( void )
 	mp["Hola"] = 2;
 	mp["mola"] = 21;
 
-	std::cout << typeid(mp).name() << std::endl;
-	//std::cout << "---- Map ---- " << std::endl;
-	//std::cout << "Search for 21 -> " << bool_string(easyfind(mp, 21)) << std::endl;
-	//std::cout << "Search for 444 -> " << bool_string(easyfind(mp, 444)) << std::endl;
-	//
+	std::cout << "---- Map ---- " << std::endl;
+	std::cout << "Search for 21 -> " << bool_string(easyfind(mp, 21)) << std::endl;
+	std::cout << "Search for 444 -> " << bool_string(easyfind(mp, 444)) << std::endl;
+	
 	std::vector<int>	vec;
 	vec.push_back(1);
 	vec.push_back(2);
 	
 	std::cout << "---- Vector ---- " << std::endl;
-	std::cout << "Search for 1 -> " << bool_string(easyfind(vec, 21)) << std::endl;
+	std::cout << "Search for 1 -> " << bool_string(easyfind(vec, 1)) << std::endl;
 	std::cout << "Search for 2 -> " << bool_string(easyfind(vec, 444)) << std::endl;
 	return 0;
 }

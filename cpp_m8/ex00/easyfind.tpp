@@ -11,18 +11,33 @@
 /* ************************************************************************** */
 
 #include "easyfind.hpp"
+#include <type_traits>
 
 template<typename T>
 bool	easyfind(T const& container, int const& x)
 {
-	typename T::const_iterator	itr;
 	bool	found = false;
-	
-	if (!dynamic_cast<std::map<T,T> >(container))
+	typename T::const_iterator	itr = std::find(container.begin(), container.end(), x);
+
+	if (itr != container.end())
+		found = true;
+	return (found);
+}
+
+template<typename K, typename T>
+bool	easyfind(std::map<K,T> const& container, int const& x)
+{
+	typename std::map<K,T>::const_iterator	itr = container.begin();
+	bool	found = false;
+
+	while (itr != container.end())
 	{
-		itr = std::find(container.begin(), container.end(), x);
-		if (itr != container.end())
+		if (itr->second == x)
+		{
 			found = true;
+			break;
+		}
+		++itr;
 	}
 	return (found);
 }

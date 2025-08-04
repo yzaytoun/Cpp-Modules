@@ -23,6 +23,28 @@ Span::~Span()
 	_numbers.clear();
 }
 
+Span::Span(const Span& s) : _size(s.getSize()), _numbers(s.getSpanValues()) {}
+
+Span&	Span::operator=(const Span& s)
+{
+	if (this != &s)
+	{
+		this->_size = s.getSize();
+		this->_numbers = s.getSpanValues();
+	}
+	return (*this);
+}
+
+std::size_t	Span::getSize(void) const
+{
+	return (_size);
+}
+
+std::vector<int>	Span::getSpanValues(void) const
+{
+	return (_numbers);
+}
+
 void	Span::addNumber(const int& num)
 {
 	if ((_numbers.size() + 1) > _size)
