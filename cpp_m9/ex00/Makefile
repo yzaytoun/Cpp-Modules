@@ -10,11 +10,11 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = a.out
+NAME = btc
 
-INC = -IAnimal.hpp -IDog.hpp -ICat.hpp -IWrongCat.cpp -IWrongAnimal.cpp
+INC = -IBitcoinExchange.hpp
 
-SRC = main.cpp Animal.cpp Dog.cpp Cat.cpp WrongCat.cpp WrongAnimal.cpp
+SRC = main.cpp BitcoinExchange.cpp
 
 CPPFLAGS := -Wall -Wextra -Werror -std=c++98 $(INC) -g
 
