@@ -28,16 +28,25 @@ class BitcoinExchange
 public:
 	/* Type & Traits */
 	typedef std::map<time_t, float>	DataBase;
+	typedef struct Config
+	{
+		Config() : sep(' '), check_val(true) { }
+		Config(const char separator, const bool check_value = true) : sep(separator) , check_val(check_value){ }
+
+		char	sep;
+		bool	check_val;
+	} 			Config;
+	
 
 private:
-	static DataBase		parseCSV(const std::string& file_path);
+	static DataBase		parseCSV(const std::string& file_path, BitcoinExchange::Config conf);
 public:
 	BitcoinExchange();
 	~BitcoinExchange();
 	BitcoinExchange(const BitcoinExchange& bit);
 	BitcoinExchange&	operator=(const BitcoinExchange& bit);
 
-	static DataBase		buildDataBase(const std::string& db_path);
+	static DataBase		buildDataBase(const std::string& db_path, BitcoinExchange::Config conf = BitcoinExchange::Config());
 
 	/* Exceptions */
 	class Exception : public std::exception

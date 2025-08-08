@@ -37,23 +37,11 @@ int		isalpha_hyphen(const int chr)
 
 void	deleteArray(std::string** strarray)
 {
-	if (strarray && *strarray)
+	if (strarray && !(*strarray)->empty())
 	{
 		delete[] *strarray;
 		*strarray = NULL;
 	}
-}
-
-static char	getSplitChar(const std::string& str, const std::string& pattern)
-{
-	std::string::const_iterator	it;
-
-	for (it = pattern.begin(); it != pattern.end(); it++)
-	{
-		if (str.find(*it) != std::string::npos)
-			break;
-	}
-	return (*it);
 }
 
 static bool	evalString(const std::string& str, int (*func)(int))
@@ -85,24 +73,11 @@ int strArrLength(const std::string* strarray)
 	return (count);
 }
 
-std::size_t	countChr(const std::string& str, const int chr)
+static std::string*	split(const std::string& str, const char c)
 {
 	std::string::const_iterator	it;
-	std::size_t	count = 0;
-
-	for (it = str.begin(); it != str.end(); it++)
-	{
-		if (*it == chr)
-			++count;
-	}
-	return (count);
-}
-
-static std::string*	split(const std::string& str, const std::string& pattern)
-{
-	std::string::const_iterator	it;
-	char			c = getSplitChar(str, pattern);
-	std::size_t		len = countChr(str, c) + 1;
+	std::string::const_iterator	cleaned_it;
+	std::size_t		len = std::count(str.begin(), str.end(), c) + 1;
 	std::string*	strarray = new std::string[len];
 	std::size_t		start = 0;
 	std::size_t		end = 0;
@@ -117,17 +92,22 @@ static std::string*	split(const std::string& str, const std::string& pattern)
 		}
 		else if (start)
 			strarray[idx] = str.substr(start);
+		cleaned_it = std::remove(strarray[idx].begin(), strarray[idx].end(), ' ');
+		strarray[idx].erase(cleaned_it, strarray[idx].end());
 	}
+	if (strarray[0].empty())
+		strarray[0] = str;
 	return (strarray);
 }
 
-bool	evalHeader(const std::string& header)
+bool	evalHeader(const std::string& header, const char sep)
 {
-	std::string*	strarray = split(header, "|,");
+	std::string*	strarray = split(header, sep);
 	bool			result = false;
 
 	if (strArrLength(strarray) == 2)
-			result = (evalString(strarray[0], isalpha_hyphen) && evalString(strarray[1], isalpha_hyphen));
+		result = (evalString(strarray[0], isalpha_hyphen)
+					&& evalString(strarray[1], isalpha_hyphen));
 	else
 		throw BitcoinExchange::Exception("Invalid header");
 	deleteArray(&strarray);
@@ -140,46 +120,81 @@ bool	evalHeader(const std::string& header)
 
 static float	toFloat(const std::string& float_string)
 {
-	float	num = -1;
+	return (std::stof(float_string));
+}
 
-	num = std::stof(float_string);
-	if (isValidValue(num))
-		throw BitcoinExchange::Exception("Bad value");
-	return (num);
+bool	inRange(const int value, const int min, const int max, bool inclusive = true)
+{
+	if (inclusive)
+		return (value >= min && value <= max);
+	return (value > min && value < max);
+}
+
+std::string	dateToString(const struct tm* datetime)
+{
+	char buffer[32];
+
+	std::strftime(buffer, 32, "%Y-%m-%d", datetime);
+	return (buffer);
+}
+
+std::string	dateToString(const time_t* time)
+{
+	struct tm*	datetime = std::localtime(time);
+	char		buffer[32];
+
+	std::strftime(buffer, 32, "%Y-%m-%d", datetime);
+	return (buffer);
 }
 
 static time_t	toDateTime(const std::string& date_string)
 {
-	struct tm		datetime;
-	time_t			time = 0;
+	struct tm*		datetime = new struct tm();
+	time_t			rawtime = 0;
 	bool			is_valid = true;
-	std::string*	strarray = split(date_string, "-");
+	std::string*	strarray = split(date_string, '-');
+	int*			values[3];
+	int		ranges[3][3] = {
+		{INT_MIN, INT_MAX, 1900},
+		{0, 11, 1},
+		{1, 31, 0}
+	};
 
+	values[0] = &datetime->tm_year;
+	values[1] = &datetime->tm_mon;
+	values[2] = &datetime->tm_mday;
 	if (strArrLength(strarray) == 3)
 	{
-		datetime.tm_year = std::stoi(strarray[0]);
-		is_valid = inRange(datetime.tm_year, 0, 365);
-		datetime.tm_mon = std::stoi(strarray[1]);
-		datetime.tm_mday = std::stoi(strarray[2]);
-		time = mktime(&datetime);
+		for (int i = 0; i < 3; i++)
+		{
+			*values[i] = std::stoi(strarray[i]) - ranges[i][2];
+			is_valid = inRange(*values[i], ranges[i][0], ranges[i][1]);
+			if (!is_valid)
+				break;
+		}
+		rawtime = mktime(datetime);
 	}
+	//std::cout << "datetime -> " << dateToString(datetime) << std::endl;
+	//std::cout << "rawtime -> " << dateToString(&rawtime) << std::endl;
 	deleteArray(&strarray);
+	delete datetime;
 	if (!is_valid)
 		throw BitcoinExchange::Exception("Bad date format");
-	return(time);
+	return(rawtime);
 }
 
 /*
 	Parser
 */
 
-static bool	parse(const std::string& content, BitcoinExchange::DataBase& db)
+static bool	parse(const std::string& content, BitcoinExchange::DataBase& db, BitcoinExchange::Config conf)
 {
 	bool			result = false;
-	std::string*	strarray = split(content, "|,");
+	std::string*	strarray = split(content, conf.sep);
 	time_t			_date;
 	float			_value;
 
+	_date = toDateTime(strarray[0]);
 	if (strArrLength(strarray) == 2)
 	{
 		_date = toDateTime(strarray[0]);
@@ -191,25 +206,26 @@ static bool	parse(const std::string& content, BitcoinExchange::DataBase& db)
 	return (result);
 }
 
-BitcoinExchange::DataBase	BitcoinExchange::parseCSV(const std::string& file_path)
+BitcoinExchange::DataBase	BitcoinExchange::parseCSV(const std::string& file_path, BitcoinExchange::Config conf)
 {
-	std::ifstream				file;
+	std::ifstream				file(file_path);
 	std::string					content;
 	BitcoinExchange::DataBase 	db;
 	int	record_count = 0;
 
-	file.open(file_path);
 	if (file.is_open())
 	{
 		while (!file.eof())
 		{
-			file >> content;
-			std::cout << content << std::endl;
-			if (record_count && !parse(content, db))
-				throw BitcoinExchange::Exception("Bad File");
-			else if (!record_count)
-				evalHeader(content);
-			++record_count;
+			std::getline(file, content);
+			if (!content.empty())
+			{
+				if (record_count && !parse(content, db, conf))
+					throw BitcoinExchange::Exception("Bad File");
+				else if (!record_count)
+					evalHeader(content, conf.sep);
+				++record_count;
+			}
 		}
 		file.close();
 	}
@@ -219,13 +235,13 @@ BitcoinExchange::DataBase	BitcoinExchange::parseCSV(const std::string& file_path
 /*
 	Converts a CSV file to a DataBase object
 */
-BitcoinExchange::DataBase	BitcoinExchange::buildDataBase(const std::string& db_path)
+BitcoinExchange::DataBase	BitcoinExchange::buildDataBase(const std::string& db_path, BitcoinExchange::Config conf)
 {
 	DataBase	db;
 
 	try
 	{
-		db = BitcoinExchange::parseCSV(db_path);
+		db = BitcoinExchange::parseCSV(db_path, conf);
 		if (db.empty())
 			throw BitcoinExchange::Exception("Empty Database");
 	}

@@ -16,8 +16,10 @@ int main(int argc, char** argv)
 {
 	if (argc == 2)
 	{
-		BitcoinExchange::DataBase	source_data = BitcoinExchange::buildDataBase(DATA_BASE_PATH);
-		BitcoinExchange::DataBase	data = BitcoinExchange::buildDataBase(argv[1]);
+		BitcoinExchange::DataBase	source_data
+			= BitcoinExchange::buildDataBase(DATA_BASE_PATH, BitcoinExchange::Config(',', false));
+		BitcoinExchange::DataBase	data
+			= BitcoinExchange::buildDataBase(argv[1], BitcoinExchange::Config('|'));
 		// Find date
 		// Count
 	}
