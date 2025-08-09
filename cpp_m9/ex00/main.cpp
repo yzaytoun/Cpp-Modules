@@ -16,12 +16,12 @@ int main(int argc, char** argv)
 {
 	if (argc == 2)
 	{
-		BitcoinExchange::DataBase	source_data
-			= BitcoinExchange::buildDataBase(DATA_BASE_PATH, BitcoinExchange::Config(',', false));
-		BitcoinExchange::DataBase	data
-			= BitcoinExchange::buildDataBase(argv[1], BitcoinExchange::Config('|'));
-		// Find date
-		// Count
+		BitcoinExchange::Config	config('|');
+		BitcoinExchange::Config	database_config(',', false);
+	
+		BitcoinExchange::DataBase	source_data = BitcoinExchange::buildDataBase(DATA_BASE_PATH, database_config);
+		config.database = &source_data;
+		BitcoinExchange::evalRecords(argv[1], config);
 	}
 	else
 		std::cerr << "One argument is requiered!!";

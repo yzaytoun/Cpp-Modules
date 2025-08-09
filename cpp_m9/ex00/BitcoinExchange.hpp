@@ -30,23 +30,27 @@ public:
 	typedef std::map<time_t, float>	DataBase;
 	typedef struct Config
 	{
-		Config() : sep(' '), check_val(true) { }
-		Config(const char separator, const bool check_value = true) : sep(separator) , check_val(check_value){ }
+		Config() : sep(' '), check_val(true), database(NULL) { }
+		Config(const char separator, const bool check_value = true)
+			: sep(separator) , check_val(check_value), database(NULL){ }
 
-		char	sep;
-		bool	check_val;
+		char		sep;
+		bool		check_val;
+		DataBase*	database;
+		bool		(*evalfunc)(const std::string&, Config&);
 	} 			Config;
 	
 
 private:
-	static DataBase		parseCSV(const std::string& file_path, BitcoinExchange::Config conf);
+	static void	parse(const std::string& file_path, BitcoinExchange::Config& conf);
 public:
 	BitcoinExchange();
 	~BitcoinExchange();
 	BitcoinExchange(const BitcoinExchange& bit);
 	BitcoinExchange&	operator=(const BitcoinExchange& bit);
-
-	static DataBase		buildDataBase(const std::string& db_path, BitcoinExchange::Config conf = BitcoinExchange::Config());
+	
+	static DataBase		buildDataBase(const std::string& db_path, BitcoinExchange::Config& conf);
+	static void			evalRecords(const std::string& file_path, BitcoinExchange::Config& conf);
 
 	/* Exceptions */
 	class Exception : public std::exception

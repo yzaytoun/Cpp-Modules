@@ -44,6 +44,13 @@ void	deleteArray(std::string** strarray)
 	}
 }
 
+bool	checkExtension(const std::string& file, const std::string& extension)
+{
+	size_t	pos = file.rfind('.');
+
+	return (pos == std::string::npos || file.substr(pos).compare(extension) != 0);
+}
+
 static bool	evalString(const std::string& str, int (*func)(int))
 {
 	std::string::const_iterator	it;
@@ -120,10 +127,17 @@ bool	evalHeader(const std::string& header, const char sep)
 
 static float	toFloat(const std::string& float_string)
 {
-	return (std::stof(float_string));
+	float	num = std::stof(float_string);
+	
+	if (!inRange(num, -std::numeric_limits<float>::max(), std::numeric_limits<float>::max()))
+		BitcoinExchange::Exception("too large number");
+	else if (num < 0)
+		BitcoinExchange::Exception("not a positive number");
+	return (num);
 }
 
-bool	inRange(const int value, const int min, const int max, bool inclusive = true)
+template<typename T>
+bool	inRange(const T value, const T min, const T max, bool inclusive = true)
 {
 	if (inclusive)
 		return (value >= min && value <= max);
@@ -174,8 +188,6 @@ static time_t	toDateTime(const std::string& date_string)
 		}
 		rawtime = mktime(datetime);
 	}
-	//std::cout << "datetime -> " << dateToString(datetime) << std::endl;
-	//std::cout << "rawtime -> " << dateToString(&rawtime) << std::endl;
 	deleteArray(&strarray);
 	delete datetime;
 	if (!is_valid)
@@ -187,31 +199,70 @@ static time_t	toDateTime(const std::string& date_string)
 	Parser
 */
 
-static bool	parse(const std::string& content, BitcoinExchange::DataBase& db, BitcoinExchange::Config conf)
+bool	parseCSV(const std::string& content, BitcoinExchange::Config& conf)
 {
 	bool			result = false;
 	std::string*	strarray = split(content, conf.sep);
 	time_t			_date;
 	float			_value;
 
-	_date = toDateTime(strarray[0]);
-	if (strArrLength(strarray) == 2)
+	try
 	{
-		_date = toDateTime(strarray[0]);
-		_value = toFloat(strarray[1]);
-		db[_date] = _value;
-		result = true;
+		if (strArrLength(strarray) == 2)
+		{
+			_date = toDateTime(strarray[0]);
+			_value = toFloat(strarray[1]);
+			(*conf.database)[_date] = _value;
+			result = true;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cerr << RED "Error: " RESET << e.what() << " => " << content << std::endl;
+		result = false;
 	}
 	deleteArray(&strarray);
 	return (result);
 }
 
-BitcoinExchange::DataBase	BitcoinExchange::parseCSV(const std::string& file_path, BitcoinExchange::Config conf)
+bool	parseTxt(const std::string& content, BitcoinExchange::Config& conf)
 {
-	std::ifstream				file(file_path);
-	std::string					content;
-	BitcoinExchange::DataBase 	db;
-	int	record_count = 0;
+	BitcoinExchange::DataBase::iterator	it_db;
+	bool			result = true;
+	std::string*	strarray = split(content, conf.sep);
+	time_t			_date;
+	float			_value;
+
+	try
+	{
+		if (strArrLength(strarray) == 2)
+		{
+			_date = toDateTime(strarray[0]);
+			_value = toFloat(strarray[1]);
+			it_db = conf.database->find(_date);
+			if (it_db == conf.database->end())
+				//it_db = find_closer_value();
+			std::cout << _date << " => " << _value << " = " << (_value * it_db->second) << std::endl;
+		}
+		else
+		{
+			BitcoinExchange::Exception("bad input");
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cerr << RED "Error: " RESET << e.what() << " => " << content << std::endl;
+	}
+	deleteArray(&strarray);
+	return (result);
+}
+
+void	BitcoinExchange::parse(const std::string& file_path, BitcoinExchange::Config& conf)
+{
+	std::ifstream	file(file_path);
+	std::string		content;
+	std::string		buff;
+	int				record_count = 0;
 
 	if (file.is_open())
 	{
@@ -220,8 +271,8 @@ BitcoinExchange::DataBase	BitcoinExchange::parseCSV(const std::string& file_path
 			std::getline(file, content);
 			if (!content.empty())
 			{
-				if (record_count && !parse(content, db, conf))
-					throw BitcoinExchange::Exception("Bad File");
+				if (record_count)
+					conf.evalfunc(content, conf);
 				else if (!record_count)
 					evalHeader(content, conf.sep);
 				++record_count;
@@ -229,19 +280,43 @@ BitcoinExchange::DataBase	BitcoinExchange::parseCSV(const std::string& file_path
 		}
 		file.close();
 	}
-	return (db); 
+}
+
+void	BitcoinExchange::evalRecords(const std::string& file_path, BitcoinExchange::Config& conf)
+{
+	try
+	{
+		if (!checkExtension(file_path, "txt"))
+			throw BitcoinExchange::Exception("Bad input file");
+		if (conf.database)
+		{
+			conf.evalfunc = &parseTxt;
+			BitcoinExchange::parse(file_path, conf);
+		}
+		else
+			throw BitcoinExchange::Exception("No database file");
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << RED "Exception: " RESET << e.what() << '\n';
+		exit(EXIT_FAILURE);
+	}
 }
 
 /*
 	Converts a CSV file to a DataBase object
 */
-BitcoinExchange::DataBase	BitcoinExchange::buildDataBase(const std::string& db_path, BitcoinExchange::Config conf)
+BitcoinExchange::DataBase	BitcoinExchange::buildDataBase(const std::string& db_path, BitcoinExchange::Config& conf)
 {
 	DataBase	db;
 
 	try
 	{
-		db = BitcoinExchange::parseCSV(db_path, conf);
+		if (!checkExtension(db_path, "csv"))
+			throw BitcoinExchange::Exception("Bad database file");
+		conf.database = &db;
+		conf.evalfunc = &parseCSV;
+		BitcoinExchange::parse(db_path, conf);
 		if (db.empty())
 			throw BitcoinExchange::Exception("Empty Database");
 	}
