@@ -25,6 +25,14 @@ BitcoinExchange&	BitcoinExchange::operator=(const BitcoinExchange& bit) {(void)b
 	Utils
 */
 
+template<typename T>
+bool	inRange(const T value, const T min, const T max, bool inclusive = true)
+{
+	if (inclusive)
+		return (value >= min && value <= max);
+	return (value > min && value < max);
+}
+
 bool	isValidValue(const float& value)
 {
 	return (value >= 0 && value <= 1000);
@@ -136,14 +144,6 @@ static float	toFloat(const std::string& float_string)
 	return (num);
 }
 
-template<typename T>
-bool	inRange(const T value, const T min, const T max, bool inclusive = true)
-{
-	if (inclusive)
-		return (value >= min && value <= max);
-	return (value > min && value < max);
-}
-
 std::string	dateToString(const struct tm* datetime)
 {
 	char buffer[32];
@@ -241,7 +241,7 @@ bool	parseTxt(const std::string& content, BitcoinExchange::Config& conf)
 			_value = toFloat(strarray[1]);
 			it_db = conf.database->find(_date);
 			if (it_db == conf.database->end())
-				//it_db = find_closer_value();
+				it_db = conf.database->lower_bound(_date);
 			std::cout << _date << " => " << _value << " = " << (_value * it_db->second) << std::endl;
 		}
 		else
