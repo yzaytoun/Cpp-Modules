@@ -133,14 +133,19 @@ bool	evalHeader(const std::string& header, const char sep)
 	Converters 
 */
 
-static float	toFloat(const std::string& float_string)
+static float	toFloat(const std::string& float_string, bool check_value)
 {
 	float	num = std::stof(float_string);
+	float	_min = 0;
+	float 	_max = 1000;
 	
-	if (!inRange(num, -std::numeric_limits<float>::max(), std::numeric_limits<float>::max()))
-		BitcoinExchange::Exception("too large number");
-	else if (num < 0)
-		BitcoinExchange::Exception("not a positive number");
+	if (check_value)
+	{
+		if (num < 0)
+			throw BitcoinExchange::Exception("not a positive number");
+		else if (!inRange(num, _min, _max))
+			throw BitcoinExchange::Exception("too large number");
+	}
 	return (num);
 }
 
@@ -169,7 +174,7 @@ static time_t	toDateTime(const std::string& date_string)
 	std::string*	strarray = split(date_string, '-');
 	int*			values[3];
 	int		ranges[3][3] = {
-		{INT_MIN, INT_MAX, 1900},
+		{0, INT_MAX, 1900},
 		{0, 11, 1},
 		{1, 31, 0}
 	};
@@ -211,7 +216,7 @@ bool	parseCSV(const std::string& content, BitcoinExchange::Config& conf)
 		if (strArrLength(strarray) == 2)
 		{
 			_date = toDateTime(strarray[0]);
-			_value = toFloat(strarray[1]);
+			_value = toFloat(strarray[1], conf.check_val);
 			(*conf.database)[_date] = _value;
 			result = true;
 		}
@@ -238,15 +243,15 @@ bool	parseTxt(const std::string& content, BitcoinExchange::Config& conf)
 		if (strArrLength(strarray) == 2)
 		{
 			_date = toDateTime(strarray[0]);
-			_value = toFloat(strarray[1]);
+			_value = toFloat(strarray[1], conf.check_val);
 			it_db = conf.database->find(_date);
 			if (it_db == conf.database->end())
 				it_db = conf.database->lower_bound(_date);
-			std::cout << _date << " => " << _value << " = " << (_value * it_db->second) << std::endl;
+			std::cout << dateToString(&_date) << " => " << _value << " = " << (_value * it_db->second) << std::endl;
 		}
 		else
 		{
-			BitcoinExchange::Exception("bad input");
+			throw BitcoinExchange::Exception("bad input");
 		}
 	}
 	catch (std::exception& e)

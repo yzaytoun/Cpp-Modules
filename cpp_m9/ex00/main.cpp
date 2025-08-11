@@ -24,6 +24,6 @@ int main(int argc, char** argv)
 		BitcoinExchange::evalRecords(argv[1], config);
 	}
 	else
-		std::cerr << "One argument is requiered!!";
+		std::cerr << "One argument is requiered!!" << std::endl;
 	return 0;
 }
