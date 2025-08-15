@@ -35,11 +35,12 @@ private:
 		MAX_CHTYPE
 	};
 
-	std::stack<int>	_stack;
-	bool			_is_valid_input;
+	std::stack<int>		_stack;
+	bool				_is_valid_input;
 
-	void	_parse(const std::string args);
-	CHtype	_identify(const int ch);
+	void		_compute(const CHtype type);
+	void		_parse(const std::string args);
+	CHtype		_identify(const int ch);
 public:
 	RPN();
 	RPN(const std::string args);
@@ -48,11 +49,10 @@ public:
 	RPN&	operator=(const RPN& r);
 
 	/* Methods */
-	std::stack<int>		getStack(void) const;
-	int					getValue(void);
-	void				print(void);
-	bool				isValid(void);
-	void				reverseStack(void);
+	std::stack<int>	getStack(void) const;
+	int				fetchValue(void);
+	void			print(void);
+	bool			isValid(void);
 
 
 	class Exception : public std::exception

@@ -68,55 +68,56 @@ RPN::CHtype	RPN::_identify(const int ch)
 	return (_type);
 }
 
+void RPN::_compute(const RPN::CHtype type)
+{
+	int	num_1 = fetchValue();
+	int num_2 = fetchValue();
+
+	switch (type)
+	{
+		case MULTIPLY:
+			_stack.push(num_2 * num_1);
+			break;
+		case DIVIDE:
+			_stack.push(num_2 / num_1);
+			break;
+		case ADD:
+			_stack.push(num_2 + num_1);
+			break;
+		case SUB:
+			_stack.push(num_2 - num_1);
+			break;
+		default:
+			break;
+	}
+}
+
 void	RPN::_parse(const std::string args)
 {
 	std::string::const_iterator	it;
-	std::string	errmsg;
-	RPN::CHtype	_type = RPN::MAX_CHTYPE;
-	RPN::CHtype	_last_type = RPN::MAX_CHTYPE;
+	RPN::CHtype	_type;
+	RPN::CHtype	_lasttype;
 
 	for (it = args.begin(); it != args.end(); it++)
 	{	
 		_type = _identify(*it);
-		if (_type == _last_type)
-			throw RPN::Exception("Repeated symbol");
-		switch (_type)
-		{
-		case NUMBER:
+		if (_type == _lasttype || _type == MAX_CHTYPE)
+			throw RPN::Exception("Unidentified symbol");
+		if (_type == NUMBER)
 			_stack.push(*it - '0');
-			if (_stack.size() == 2)
-				reverseStack();
-			break;
-		case MULTIPLY:
-			_stack.push(getValue() * getValue());
-			break;
-		case DIVIDE:
-			_stack.push(getValue() / getValue());
-			break;
-		case ADD:
-			_stack.push(getValue() + getValue());
-			break;
-		case SUB:
-			_stack.push(getValue() - getValue());
-			break;
-		case SPACE:
-			break;
-		default:
-			errmsg = "Invalid input at -> ";
-			throw RPN::Exception(errmsg + *it);
-			break;
-		}
-		_last_type = _type;
+		else if (_type != MAX_CHTYPE && _type != SPACE)
+			_compute(_type);
+		_lasttype = _type;
 	}
 }
 
-int	RPN::getValue(void)
+int	RPN::fetchValue(void)
 {
-	int num = -1;
+	int num;
+
 	if (!_stack.empty())
 	{
 		num = _stack.top();
-		std::cout << "num -> " << num << std::endl;
 		_stack.pop();
 	}
 	else
@@ -132,16 +133,4 @@ void	RPN::print()
 bool	RPN::isValid()
 {
 	return (_is_valid_input);
-}
-
-void	RPN::reverseStack()
-{
-	std::stack<int>	temp_stack;
-
-	while (!_stack.empty())
-	{
-		temp_stack.push(_stack.top());
-		_stack.pop();
-	}
-	_stack = temp_stack;
 }

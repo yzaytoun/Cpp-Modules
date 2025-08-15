@@ -19,7 +19,7 @@
 #include <ctime>
 #include <fstream>
 
-# define DATA_BASE_PATH "../data/data.csv"
+# define DATA_BASE_PATH "/data/data.csv"
 # define RED	"\x1B[1;31m"
 # define RESET	"\x1B[0m"
 
