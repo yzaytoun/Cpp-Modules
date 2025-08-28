@@ -16,137 +16,157 @@
    ----------  PmergeMe -------------
 */
 
-PmergeMe::PmergeMe() {}
-
-PmergeMe::~PmergeMe() {}
-
-PmergeMe::PmergeMe(const PmergeMe& pmerg)
+template<>
+void	_Jsort<std::list<int> >(std::list<int>& lst)
 {
-	*this = pmerg;
-}
+	std::size_t					mid_point;
+	std::list<int>				_left;
+	std::list<int>				_right;
+	std::list<int>::iterator	it = lst.begin();
+	int							temp = INT_MAX;
 
-PmergeMe&   PmergeMe::operator=(const PmergeMe& pmerg)
-{
-	if (this != &pmerg)
+	/* Make even */
+	if (lst.size()%2 != 0)
 	{
-		this->_list_container = pmerg.getList();
-		this->_vec_container = pmerg.getVector();
+		temp = lst.back();
+		lst.pop_back();
 	}
-	return (*this);
+	mid_point = lst.size() / 2;
+	/* Divide */
+	if (mid_point > 1)
+	{
+		std::advance(it, mid_point);
+		_left.assign(lst.begin(), it);
+		_Jsort(_left);
+		_right.assign(it, lst.end());
+		_Jsort(_right);
+	}
+	else if (!lst.empty() && (lst.front() > lst.back()))
+		std::swap(lst.front(), lst.back());
+	if (!_left.empty() && !_right.empty())
+	{
+		lst.clear();
+		if (_left.back() < _right.back())
+			std::merge(_left.begin(), _left.end(), _right.begin(), _right.end(), std::back_inserter(lst));
+		else
+			std::merge(_right.begin(), _right.end(), _left.begin(), _left.end(), std::back_inserter(lst));
+	}
+	if (temp != INT_MAX)
+		lst.insert(
+			std::upper_bound(lst.begin(), lst.end(), temp),
+			temp
+		);
 }
 
-std::vector<int>	PmergeMe::getVector() const
+template<>
+std::string	convertChArray<std::string>(const int argc, const char** argv)
 {
-	return (_vec_container);
-}
+	std::string		str;
+	char** 			ptr = (char**)(argv + 1);
+	char** 			array_ptr = NULL;
+	std::size_t		ch_count;
+	std::string		buffer;
 
-std::list<int>		PmergeMe::getList() const
-{
-	return (_list_container);
-}
-
-std::string	compressChArray(const char** argv)
-{
-	std::string	str;
-	const char** ptr = argv;
-
-	while (*ptr)
+	if (argc == 2)
+	{
+		buffer = argv[1];
+		ch_count = std::count(buffer.begin(), buffer.end(), ' ');
+		if (ch_count > 0)
+		{
+			ptr = split(buffer, ch_count);
+			array_ptr = ptr;
+		}
+	}
+	while (*(ptr + 1))
 	{
 		str.append(*ptr);
 		str.append(" ");
 		++ptr;
-	} 
+	}
+	str.append(*ptr);
+	if (array_ptr)
+		deleteChArray(&array_ptr);
 	return (str);
 }
 
-std::vector<int>	ChArrayToVector(const char** argv)
-{
-	std::vector<int>	vec;
-	const char** ptr = argv;
-	int	num = 0;
+/* String & Char Array Functions */
 
-	while (*ptr)
+void	deleteChArray(char*** array)
+{
+	if ((*array))
 	{
-		num = std::stoi(*ptr);
-		vec.push_back(num);
-		++ptr;
+		delete [] (*array);
+		(*array) = NULL;
 	}
-	return (vec);
 }
 
-std::list<int>	ChArrayToList(const char** argv)
+char**	split(const std::string& str, const std::size_t ch_count)
 {
-	std::list<int>	lst;
-	const char** ptr = argv;
-	int	num = 0;
-	
-	while (*ptr)
+	char**		new_charray = new char*[ch_count + 1];
+	int			count = 0;
+	std::size_t	start = 0;
+	std::size_t	end = 0;
+
+	while (end != std::string::npos)
 	{
-		num = std::stoi(*ptr);
-		lst.push_back(num);
-		++ptr;
+		end = str.find(' ', start);
+		if (end != std::string::npos)
+		{
+			new_charray[count] = new char[end - start];
+			if (new_charray[count])
+			{
+				str.copy(new_charray[count], end - start, start);
+				new_charray[count][end - start] = '\0';
+			}
+			else
+				break;
+			++count;
+			start = end + 1;
+		}
+		else if (start != std::string::npos)
+		{
+			new_charray[count] = new char[str.substr(start).length()];
+			str.copy(new_charray[count], str.substr(start).length(), start);
+			new_charray[count][str.substr(start).length()] = '\0';
+		}
 	}
-	return (lst);
+	new_charray[ch_count + 1] = NULL;
+	return (new_charray);
 }
 
-void	_JsortVector(std::vector<int>& vec)
+bool	_isspace(unsigned int c)
 {
-	std::size_t	mid_point = vec.size()/2;
-	std::vector<int>	left_vector;
-	std::vector<int>	right_vector;
-
-	if (mid_point > 1)
-	{
-		left_vector.assign(vec.begin(), vec.begin() + mid_point);
-		_JsortVector(left_vector);
-		right_vector.assign(vec.begin() + mid_point, vec.end());
-		_JsortVector(right_vector);
-	}
-	if (left_vector.at(0) > right_vector.at(0))
-		left_vector.insert(left_vector.end(), right_vector.begin(), right_vector.end());
-	vec = left_vector;
+	return (std::isspace(c));
 }
 
-void	_JsortList(std::list<int>& lst)
+int	_isnotspace(unsigned int c)
 {
-	(void)lst;
+	return !_isspace(c);
+}
+int	_isnotdigit(unsigned int c)
+{
+	return (!std::isdigit(c) && c != '-' && c != '+');
 }
 
-std::string	vecToString(const std::vector<int>& vec)
+std::string	trim(const std::string& str)
 {
-	std::vector<int>::const_iterator	it;
-	std::string	str;
+	std::string::const_iterator	start_it;
+	std::string::const_iterator	end_it;
+	std::string	trimmed;
 
-	for (it = vec.begin(); it != vec.end() - 1; it++)
-		str.append(std::to_string(vec.at(*it)) + ' ');
-	str.append(std::to_string(vec.at(*it)));
-	return (str);
+	start_it = std::find_if(str.begin(), str.end(), _isnotspace);
+	end_it = std::find_if(start_it, str.end(), _isspace);
+	if (start_it != str.end())
+		trimmed = str.substr(
+			std::distance(str.begin(), start_it),
+			std::distance(str.begin(), end_it)
+		);
+	return (trimmed);
 }
 
-void	PmergeMe::sort(const char** argv)
+bool	isNumber(const std::string& str)
 {
-	Timer				vec_timer;
-	Timer				list_timer;
-	std::stringstream	ss;
-
-	ss << "Before: " << compressChArray(argv);
-	
-	/* Vector */
-	vec_timer.start();
-	_vec_container = ChArrayToVector(argv);
-	_JsortVector(_vec_container);
-	vec_timer.stop();
-	
-	/* List */
-	list_timer.start();
-	_list_container = ChArrayToList(argv);
-	_JsortList(_list_container);
-	list_timer.stop();
-	
-	ss << "After: " << vecToString(_vec_container);
-	ss << "Time to process a range of " << _vec_container.size() << " elements with std::vector : " <<  vec_timer.getTime() << " us" << std::endl;
-	ss << "Time to process a range of " << _list_container.size() <<  "elements with std::list : " <<  list_timer.getTime() << " us" << std::endl;
-	std::cout << ss.str();
+	return (std::find_if(str.begin(), str.end(), _isnotdigit) == str.end());
 }
 
 /*
@@ -170,25 +190,25 @@ Timer&  Timer::operator=(const Timer& time)
 
 void    Timer::start()
 {
-	std::time(&_start_time);
+	_start_time = clock();
 }
 
 void Timer::stop()
 {
-	std::time(&_finish_time);
+	_finish_time = clock();
 }
 
 std::string Timer::getTime() const
 {
-	return (std::to_string(std::difftime(_finish_time, _start_time)));
+	return (std::to_string((double)((1000.0 * (_finish_time - _start_time) / CLOCKS_PER_SEC))));
 }
 
-std::time_t Timer::getStartTime() const
+std::clock_t Timer::getStartTime() const
 {
 	return (_start_time);
 }
 
-std::time_t Timer::getFinishTime() const
+std::clock_t Timer::getFinishTime() const
 {
 	return (_finish_time);
 }

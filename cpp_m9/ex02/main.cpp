@@ -18,9 +18,13 @@ int main(int argc, const char** argv)
 	{
 		try
 		{
-			PmergeMe	prg;
+			PmergeMe<>					def;
+			PmergeMe<std::list<int> >	lst;
+			PmergeMe<std::deque<int> >	dq;
 
-			prg.sort(argv);
+			def.sort(argc ,argv);
+			lst.sort(argc, argv);
+			dq.sort(argc, argv);
 		}
 		catch(const std::exception& e)
 		{
