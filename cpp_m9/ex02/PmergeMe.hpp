@@ -19,6 +19,7 @@
 #include <list>
 #include <ctime>
 #include <cctype>
+#include <deque>
 #include <sstream>
 
 # define RED	"\x1B[1;31m"
